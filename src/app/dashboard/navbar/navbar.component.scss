@@ -1,0 +1,42 @@
+@import './../../../assets/styles/theme.scss';
+
+.navbar {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 16px 0;
+
+  mat-toolbar {
+    height: 60px;
+    padding: 0 8px;
+    background-color: $background-navbar;
+    color: $color-navbar;
+  }
+
+  &-btn {
+    min-width: 159px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: $btn-background-navbar;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 10px 0;
+    margin: 0 8px;
+  }
+
+  &-spacer {
+    flex: 1 1 auto;
+  }
+
+  .icon {
+    height: 16px;
+    width: 16px;
+
+    &.user {
+      margin-left: 20px;
+    }
+  }
+
+  .icon-btn {
+    min-width: 36px;
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "flight": [
+    { 
+      "id": 1,
+      "departure": "Bydgoszcz (BZG)",
+      "arrival": "Gdańsk (GDN)"
+    }
+  ],
+  "city": [
+    { "id": 1, "name": "Bydgoszcz", "key": "BZG" },
+    { "id": 2, "name": "Gdańsk", "key": "GDN" },
+    { "id": 3, "name": "Katowice", "key": "KTW" },
+    { "id": 4, "name": "Kraków", "key": "KRK" },
+    { "id": 5, "name": "Lublin", "key": "LUZ" },
+    { "id": 6, "name": "Łódź", "key": "LCJ" },
+    { "id": 7, "name": "Olsztyn-Mazury", "key": "SZY" },
+    { "id": 8, "name": "Poznań", "key": "POZ" },
+    { "id": 9, "name": "Rzeszów", "key": "RZE" },
+    { "id": 10, "name": "Szczecin", "key": "SZZ" },
+    { "id": 11, "name": "Warszawa", "key": "WAW" },
+    { "id": 12, "name": "Wrocław", "key": "WRO" },
+    { "id": 13, "name": "Zielona Góra", "key": "IEG" }
+  ]
+}
