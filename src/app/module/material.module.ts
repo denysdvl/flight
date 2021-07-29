@@ -4,6 +4,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatCardModule} from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
 
 
 const MaterialComponents = [
@@ -11,7 +13,9 @@ const MaterialComponents = [
   MatToolbarModule,
   MatIconModule,
   MatButtonModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatCardModule,
+  MatSelectModule
 ];
 
 @NgModule({

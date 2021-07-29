@@ -1,0 +1,18 @@
+<mat-form-field appearance="outline">
+  <mat-select
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    (selectionChange)="selecting($event.value)"
+  >
+    <ng-container *ngFor="let item of list">
+      <mat-option
+        class="custom-option"
+        [disabled]="item.disabled"
+        [value]="item.key"
+      >
+        {{ item.name }} ({{ item.key }})
+      </mat-option>
+    </ng-container>
+  </mat-select>
+</mat-form-field>
+<div class="error"></div>

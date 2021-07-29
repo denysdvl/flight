@@ -1,9 +1,39 @@
-@import './../assets/styles/theme.scss';
+@import "./../assets/styles/theme.scss";
 
-.container {
+:host {
+  position: fixed;
   width: 100%;
   height: 50%;
   background: url("/assets/icon/background.svg") no-repeat;
   -webkit-background-size: cover;
   background-size: cover;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 250px;
+
+  .form-card {
+    border-radius: 0;
+    box-shadow: none;
+    background-color: rgba($background-form, 0.9);
+
+    .card-header {
+      font-size: 18px;
+      line-height: 21px;
+      margin-bottom: 16px;
+    }
+
+    .content {
+      display: flex;
+
+      & > :nth-child(n) {
+        margin-right: 16px;
+      }
+
+      & > :last-child {
+        margin-right: 0;
+      }
+    }
+  }
 }

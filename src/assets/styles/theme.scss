@@ -2,6 +2,7 @@
 $red-primary: #BA0000;
 $white: #FFFFFF;;
 $black: #000000;
+$gray: #989898;
 $blue-primary: #47A7FF;
 $blue-secondary: #319CFF;
 
@@ -9,3 +10,12 @@ $blue-secondary: #319CFF;
 $background-navbar: $blue-primary;
 $color-navbar: $white;
 $btn-background-navbar: $blue-secondary;
+
+/* form */
+$background-form: $white;
+
+/* select */
+$border-color-select: $blue-primary;
+$color-selected-value: $blue-primary;
+$disabled-border-color-select: $gray;
+$background-color-select: $white;

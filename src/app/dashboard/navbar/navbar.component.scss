@@ -1,9 +1,7 @@
-@import './../../../assets/styles/theme.scss';
+@import "./../../../assets/styles/theme.scss";
 
 .navbar {
-  max-width: 940px;
-  margin: 0 auto;
-  padding: 16px 0;
+  margin: 16px 0;
 
   mat-toolbar {
     height: 60px;

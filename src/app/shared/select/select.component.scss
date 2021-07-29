@@ -1,0 +1,93 @@
+@import "./../../../assets/styles/theme.scss";
+
+:host {
+  display: block;
+  width: 200px;
+
+  .error {
+    height: 25px;
+    line-height: 25px;
+    width: 100%;
+  }
+
+  ::ng-deep {
+    .mat-select-panel {
+      position: absolute;
+      top: 32px;
+      left: 4px;
+      min-width: calc(100% + 22px) !important;
+      border-radius: 0px !important;
+      border: 1px solid $border-color-select;
+      border-top-style: none;
+    }
+
+    .mat-form-field {
+      height: 36px;
+      background: $background-color-select;
+
+      &.mat-form-field-disabled {
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          width: calc(100% - 4px);
+          height: calc(100% - 6px);
+          z-index: 3;
+          border: 2px solid $disabled-border-color-select;
+          background-color: rgba($disabled-border-color-select, 0.5);
+        }
+      }
+    }
+
+    .mat-select-value {
+      color: $color-selected-value;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-outline-start {
+      border-radius: 0px !important;
+      border: 1px solid $border-color-select;
+      border-right-style: none !important;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-outline-end {
+      border-radius: 0px !important;
+      border: 1px solid $border-color-select;
+      border-left-style: none !important;
+    }
+
+    .mat-form-field-infix {
+      padding: 0;
+    }
+
+    .mat-form-field-flex {
+      height: 36px;
+      width: 200px;
+    }
+
+    .mat-select-panel ng-animating {
+      visibility: hidden;
+    }
+
+    .mat-form-field-wrapper {
+      box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .mat-select-arrow {
+      border-style: solid;
+      border-color: $border-color-select !important;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 5px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+
+    .custom-option {
+      max-height: 36px;
+      line-height: 20px;
+    }
+  }
+}

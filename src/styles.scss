@@ -9,3 +9,12 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.cdk-overlay-pane {
+  margin-top: 35px;
+}
+
+.mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
+  height: 36px !important;
+  line-height: 36px !important;
+}

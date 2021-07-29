@@ -1,3 +1,20 @@
 <div class="container">
   <app-navbar></app-navbar>
+  <mat-card class="form-card" *ngIf="flightCity.length">
+    <div class="card-header">Wyszukaj loty</div>
+    <mat-card-content class="content">
+      <app-select
+        placeholder="Miejsce wylotu"
+        [list]="flightCity"
+        (selectionChange)="selectedDepartureCity($event)"
+      >
+      </app-select>
+      <app-select
+        placeholder="Miejsce przylotu"
+        [list]="flightCity"
+        (selectionChange)="selectedDepartureCity($event)"
+      >
+      </app-select>
+    </mat-card-content>
+  </mat-card>
 </div>
