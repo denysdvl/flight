@@ -5,6 +5,7 @@ import * as _moment from 'moment';
 import { FlightApi } from '../../../services/flight.service';
 import { IconService } from '../../../services/icon.service';
 import { City } from '../../../model/city';
+import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 const moment = _moment;
 
 @Component({
@@ -22,6 +23,12 @@ export class SearchFlightComponent implements OnInit {
   minDate: Date = new Date();
   destroy$ = new Subject();
   errorReturnDate = '';
+  form: FormGroup = new FormGroup({
+    departure: new FormControl('', Validators.required),
+    arrival: new FormControl('', Validators.required),
+    departureDate: new FormControl('', Validators.required),
+    returnDate: new FormControl('')
+  });
   constructor(private flightApi: FlightApi, private iconService: IconService) {}
 
   ngOnInit(): void {
@@ -34,12 +41,16 @@ export class SearchFlightComponent implements OnInit {
   }
 
   setDepartureCity(cityKey: string) {
-    this.departure = cityKey;
+    this.form.patchValue({
+      departure: cityKey, 
+    });
     this.disabledCity(cityKey);
   }
 
   setArrivalCity(cityKey: string) {
-    this.arrival = cityKey;
+    this.form.patchValue({
+      arrival: cityKey, 
+    });
     this.disabledCity(cityKey);
   }
 
@@ -51,21 +62,39 @@ export class SearchFlightComponent implements OnInit {
 
   setDepartureDate(date: Date) {
     if (!date) {
-      this.departureDate = '';
-      this.returnDate = '';
+      this.form.patchValue({
+        departureDate: '', 
+        returnDate: '', 
+      });
       this.minDate = new Date();
       return;
     }
-    this.errorReturnDate = ''
-    this.departureDate = moment(date).format('YYYY-MM-DD HH:mm');
+    this.form.patchValue({
+      departureDate: moment(date).format('YYYY-MM-DD HH:mm'), 
+    });
     this.minDate = date;
-    if (this.returnDate.length && date > new Date(this.returnDate)) {
-      this.errorReturnDate = 'Data przylotu nie może być wcześniejsza.'
+    this.setErrorForDate();
+  }
+
+  setErrorForDate() {
+    this.errorReturnDate = ''
+    const returnDate = this.form.get('returnDate');
+    const departureDate = this.form.get('departureDate');
+    if (returnDate && departureDate && returnDate.value.length && new Date(departureDate.value) > new Date(returnDate.value)) {
+      this.errorReturnDate = 'Data przylotu nie może być wcześniejsza.';
+      this.form.get('returnDate')?.setErrors({'msg': this.errorReturnDate});
     }
   }
 
   setReturnDate(date: Date) {
-    this.returnDate = moment(date).format('YYYY-MM-DD HH:mm');
+    this.form.patchValue({
+      returnDate: moment(date).format('YYYY-MM-DD HH:mm'), 
+    });
+    this.setErrorForDate();
+  }
+
+  submit() {
+    console.log(this.form);
   }
 
   ngOnDestroy(): void {
