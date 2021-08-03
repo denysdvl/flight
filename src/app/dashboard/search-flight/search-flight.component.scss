@@ -1,0 +1,43 @@
+@import "./../../../assets/styles/theme.scss";
+
+.form-card {
+  border-radius: 0;
+  box-shadow: none;
+  background-color: rgba($background-form, 0.9);
+
+  .card-header {
+    font-size: 18px;
+    line-height: 21px;
+    margin-bottom: 16px;
+  }
+
+  .content {
+    display: flex;
+
+    &> :nth-child(n) {
+      margin-right: 16px;
+    }
+
+    &> :last-child {
+      margin-right: 0;
+    }
+  }
+
+  .icon {
+    height: 16px;
+    width: 16px;
+
+    &.user {
+      margin-left: 20px;
+    }
+  }
+
+  .icon-btn {
+    min-width: 36px;
+    max-height: 36px;
+    background-color: $btn-background-navbar;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 0;
+  }
+}

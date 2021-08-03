@@ -1,0 +1,94 @@
+@import "./../../../assets/styles/theme.scss";
+
+:host {
+  display: block;
+  width: 200px;
+
+  .error {
+    height: 25px;
+    line-height: 25px;
+    font-size: 10px;
+    width: 100%;
+    color: $error-color-datepicker;
+  }
+
+  ::ng-deep {
+    .datepicker-form {
+      height: 34px;
+      width: 198px;
+      border-radius: 0px !important;
+      border: 1px solid $border-color-datepicker;
+      box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+      background: $background-color-datepicker;
+
+
+      &.form-error {
+        border: 1px solid $error-color-datepicker;
+
+        .mat-datepicker-toggle-default-icon, .mat-input-element {
+          color:  $error-color-datepicker !important;
+        }
+      }
+
+      &.mat-form-field-disabled {
+        opacity: 0.5;
+      }
+
+      .mat-select-value {
+        color: $color-datepicker-value;
+      }
+
+      .mat-form-field-label-wrapper,
+      .mat-input-element {
+        line-height: 36px;
+        margin: 0;
+        top: 0;
+        padding: 0;
+        margin-left: 10px;
+
+        .mat-form-field-label {
+          top: 0;
+        }
+      }
+
+      .mat-input-element {
+        padding-left: 10px;
+        width: calc(100% - 10px);
+        color: $color-datepicker-value;
+      }
+
+      .mat-form-field-suffix {
+        padding-right: 5px;
+      }
+
+      .mat-button-wrapper {
+        background: $background-color-datepicker;
+      }
+
+      .mat-form-field-underline {
+        display: none;
+      }
+
+      .mat-datepicker-toggle-default-icon {
+        width: 1.3em;
+        color: $color-datepicker-icon;
+      }
+
+      .mat-form-field-flex {
+        height: calc(36px - 2px);
+      }
+
+      .mat-form-field-infix {
+        padding: 0 !important;
+        margin: 0 !important;
+        line-height: 34px;
+        border: none;
+      }
+
+      .mat-form-field-wrapper {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+    }
+  }
+}

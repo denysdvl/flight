@@ -6,26 +6,30 @@ import { NavbarComponent } from './dashboard/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './module/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { SelectComponent } from './shared/select/select.component';
+import { DatepickerComponent } from './shared/datepicker/datepicker.component';
+import { SearchFlightComponent } from './dashboard/search-flight/search-flight.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    SelectComponent
+    SelectComponent,
+    DatepickerComponent,
+    SearchFlightComponent
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

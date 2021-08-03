@@ -24,6 +24,7 @@
     .mat-form-field {
       height: 36px;
       background: $background-color-select;
+      box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 
       &.mat-form-field-disabled {
         position: relative;
@@ -48,12 +49,22 @@
       border-radius: 0px !important;
       border: 1px solid $border-color-select;
       border-right-style: none !important;
+      top: 0;
     }
 
     .mat-form-field-appearance-outline .mat-form-field-outline-end {
       border-radius: 0px !important;
       border: 1px solid $border-color-select;
       border-left-style: none !important;
+      top: 0;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+      top: 0;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-flex {
+      margin-top: 0;
     }
 
     .mat-form-field-infix {
@@ -70,7 +81,6 @@
     }
 
     .mat-form-field-wrapper {
-      box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
       padding: 0 !important;
       margin: 0 !important;
     }
