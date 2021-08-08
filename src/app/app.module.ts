@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SelectComponent } from './shared/select/select.component';
 import { DatepickerComponent } from './shared/datepicker/datepicker.component';
 import { SearchFlightComponent } from './dashboard/search-flight/search-flight.component';
+import { FlightCardComponent } from './dashboard/flight-card/flight-card.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SearchFlightComponent } from './dashboard/search-flight/search-flight.c
     NavbarComponent,
     SelectComponent,
     DatepickerComponent,
-    SearchFlightComponent
+    SearchFlightComponent,
+    FlightCardComponent
   ],
   imports: [
     BrowserModule,

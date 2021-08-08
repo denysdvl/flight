@@ -31,6 +31,13 @@ const SEARCH = `
 <path d="M10.3439 11.7422C10.3734 11.7822 10.4062 11.8204 10.4424 11.8566L14.2929 15.7071C14.6834 16.0976 15.3166 16.0976 15.7071 15.7071C16.0976 15.3166 16.0976 14.6834 15.7071 14.2929L11.8566 10.4424C11.8204 10.4062 11.7822 10.3734 11.7422 10.3439C11.3499 10.878 10.878 11.3499 10.3439 11.7422Z" fill="white"/>
 </svg>
 `;
+
+const ARROW_RIGHT = `
+<svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 4C0 4.27614 0.223858 4.5 0.5 4.5H6.29289L4.14645 6.64645C3.95118 6.84171 3.95118 7.15829 4.14645 7.35355C4.34171 7.54882 4.65829 7.54882 4.85355 7.35355L7.85355 4.35355C8.04882 4.15829 8.04882 3.84171 7.85355 3.64645L4.85355 0.646447C4.65829 0.451184 4.34171 0.451184 4.14645 0.646447C3.95118 0.841709 3.95118 1.15829 4.14645 1.35355L6.29289 3.5L0.5 3.5C0.223858 3.5 0 3.72386 0 4Z" fill="black"/>
+</svg>
+
+`;
 /**
  * @title SVG icons
  */
@@ -45,5 +52,6 @@ export class IconService  {
     iconRegistry.addSvgIconLiteral('shopping-cart', sanitizer.bypassSecurityTrustHtml(SHOPPING_CART));
     iconRegistry.addSvgIconLiteral('calendar-cart', sanitizer.bypassSecurityTrustHtml(CALENDAR_CART));
     iconRegistry.addSvgIconLiteral('search', sanitizer.bypassSecurityTrustHtml(SEARCH));
+    iconRegistry.addSvgIconLiteral('arrow-right', sanitizer.bypassSecurityTrustHtml(ARROW_RIGHT));
   }
 }

@@ -16,8 +16,8 @@ export class ApiService {
     }),
   };
   constructor(private http: HttpClient) {}
-  get<T>(url: string, opt = {}): Observable<T> {
-    const options = Object.assign(opt, this.httpOptions);
+  get<T>(url: string, params = {}, opt = {}): Observable<T> {
+    const options = Object.assign(params, opt, this.httpOptions);
     return this.http.get<T>(this.baseUrl + url, options);
   }
 

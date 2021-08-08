@@ -5,13 +5,13 @@
       <app-select
         placeholder="Miejsce wylotu"
         [list]="flightCity"
-        (selectionChange)="setDepartureCity($event)"
+        (selectionChange)="setCity($event, 'departure')"
       >
       </app-select>
       <app-select
         placeholder="Miejsce przylotu"
         [list]="flightCity"
-        (selectionChange)="setArrivalCity($event)"
+        (selectionChange)="setCity($event, 'arrival')"
       >
       </app-select>
   

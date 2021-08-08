@@ -26,6 +26,7 @@ import {
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {MatListModule} from '@angular/material/list';
 
 export const MY_FORMATS: NgxMatDateFormats = {
   parse: {
@@ -54,6 +55,7 @@ const MaterialComponents = [
   NgxMatTimepickerModule,
   MatMomentDateModule,
   NgxMatNativeDateModule,
+  MatListModule
 ];
 
 @NgModule({

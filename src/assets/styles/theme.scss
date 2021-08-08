@@ -20,10 +20,21 @@ $color-selected-value: $blue-primary;
 $disabled-border-color-select: $gray;
 $background-color-select: $white;
 
-/* select */
+/* datepicker */
 $border-color-datepicker: $blue-primary;
 $error-color-datepicker: $red-primary;
 $color-datepicker-value: $blue-primary;
 $color-datepicker-icon: $blue-primary;
 $disabled-border-color-datepicker: $gray;
 $background-color-datepicker: $white;
+
+/* btn */
+$btn-background-blue: $blue-secondary;
+$btn-color-blue: $blue-secondary;
+
+/* list */
+$list-icon-border-color: $black;
+
+/* footer */
+$footer-background: $blue-secondary;
+$footer-color: $white;

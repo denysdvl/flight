@@ -1,0 +1,31 @@
+<mat-card class="list-card">
+  <div class="card-header">Lista lotów</div>
+  <mat-card-content class="content">
+    <mat-list role="list">
+      <ng-container *ngFor="let item of flightList$ | async">
+        <mat-list-item role="flightList">
+          <div class="wrap-item">
+            <span class="item">
+              {{ item.departure }}
+            </span>
+            <span class="item">
+              {{ item.arrival }}
+            </span>
+            <span class="item">
+              {{ item.departureDate }}
+            </span>
+            <span class="wrap-icon">
+              <mat-icon
+                svgIcon="arrow-right"
+                class="icon"
+                aria-hidden="false"
+                aria-label="arrow right SVG icon"
+              ></mat-icon>
+            </span>
+          </div>
+        </mat-list-item>
+      </ng-container>
+    </mat-list>
+    <button class="list-card-btn" (click)="nextPage()" mat-button>Załaduj więcej</button>
+  </mat-card-content>
+</mat-card>

@@ -10,12 +10,13 @@ export class SelectComponent implements OnInit {
   @Input() placeholder = '';
   @Input() disabled = false;
   @Input() list: City[] = [];
-  @Output() selectionChange: EventEmitter<string> = new EventEmitter();
+  @Output() selectionChange: EventEmitter<City> = new EventEmitter();
   constructor() {}
 
   ngOnInit() {}
 
   selecting(selectedKey: string) {
-    this.selectionChange.emit(selectedKey);
+    const item = this.list.find(({key}) => key === selectedKey);
+    this.selectionChange.emit(item);
   }
 }

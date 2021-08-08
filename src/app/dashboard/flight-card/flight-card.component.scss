@@ -1,0 +1,73 @@
+@import "./../../../assets/styles/theme.scss";
+
+::ng-deep {
+  .mat-list {
+    padding-top: 0;
+    height: 360px;
+    overflow: auto;
+  }
+
+  .mat-list-item {
+    height: 36px !important;
+  }
+}
+
+.list-card {
+  margin-top: 16px;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: $background-form;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+
+  .card-header {
+    font-size: 18px;
+    line-height: 21px;
+    margin-bottom: 16px;
+  }
+
+  .wrap-item {
+    display: flex;
+    justify-content: flex-start;
+    flex: 1;
+  }
+
+  .item {
+    font-size: 14px;
+    line-height: 16px;
+    margin-left: 16px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  .wrap-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid $list-icon-border-color;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+
+    .icon {
+      width: 10px;
+      height: 16px;
+    }
+  }
+
+  &-btn {
+    min-width: 159px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: transparent;
+    color: $btn-color-blue;
+    margin: 0 auto;
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 10px 0;
+  }
+}

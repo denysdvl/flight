@@ -15,10 +15,6 @@ const moment = _moment;
 })
 export class SearchFlightComponent implements OnInit {
   flightCity: City[] = [];
-  departure = '';
-  arrival = '';
-  departureDate = '';
-  returnDate = '';
   moment = _moment;
   minDate: Date = new Date();
   destroy$ = new Subject();
@@ -40,18 +36,15 @@ export class SearchFlightComponent implements OnInit {
       });
   }
 
-  setDepartureCity(cityKey: string) {
-    this.form.patchValue({
-      departure: cityKey, 
-    });
-    this.disabledCity(cityKey);
+  randomDate(start: Date, end: Date) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
   }
 
-  setArrivalCity(cityKey: string) {
+  setCity(city: City, formControl: string) {
     this.form.patchValue({
-      arrival: cityKey, 
+      [formControl]: `${city.name} (${city.key})`, 
     });
-    this.disabledCity(cityKey);
+    this.disabledCity(city.key);
   }
 
   disabledCity(cityKey: string) {
@@ -93,8 +86,15 @@ export class SearchFlightComponent implements OnInit {
     this.setErrorForDate();
   }
 
+  searchFlight() {
+    const formData = {
+      ...this.form.value
+    }
+    this.flightApi.filterFlight(formData.arrival, formData.departure, formData.departureDate, formData.returnDate);
+  }
+
   submit() {
-    console.log(this.form);
+    this.searchFlight();
   }
 
   ngOnDestroy(): void {
