@@ -9,6 +9,10 @@
 
   .mat-list-item {
     height: 36px !important;
+    cursor: pointer;
+    &:nth-child(2n) {
+      background-color: $list-item-n2-background-color;
+    }
   }
 }
 
@@ -35,6 +39,7 @@
     font-size: 14px;
     line-height: 16px;
     margin-left: 16px;
+    width: 130px;
 
     &:first-child {
       margin-left: 0;

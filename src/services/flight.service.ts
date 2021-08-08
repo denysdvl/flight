@@ -14,9 +14,7 @@ const moment = _moment;
 export class FlightApi {
   private flightList$ = new BehaviorSubject<Flight[]>([]);
   private flightParam$ = new BehaviorSubject<HttpParams>(new HttpParams());
-  private departureDate$ = new BehaviorSubject<string>(
-    moment(new Date()).format('YYYY-MM-DD HH:mm')
-  );
+  private departureDate$ = new BehaviorSubject<string>(moment(new Date()).format('YYYY-MM-DD HH:mm'));
   constructor(private apiService: ApiService) {}
 
   getCity(): Observable<City[]> {
@@ -32,6 +30,7 @@ export class FlightApi {
     arrival: string,
     departure: string,
     departureDate: string,
+    returnDate: string,
     page = 1
   ): void {
     const params = new HttpParams()
@@ -41,7 +40,10 @@ export class FlightApi {
       .set('arrival', arrival);
     this.departureDate$.next(departureDate);
     this.flightParam$.next(params);
-    this.getFlight(params).pipe(tap((flightList) => this.updateList(flightList, page.toString()))).subscribe();
+    this.getFlight(params).pipe(tap((flightList) => {
+      console.log("🚀 ~ file: flight.service.ts ~ line 45 ~ FlightApi ~ this.getFlight ~ flightList", flightList)
+      this.updateList(flightList, page.toString())
+    })).subscribe();
   }
 
   randomFlight(page: number): void {
@@ -63,13 +65,14 @@ export class FlightApi {
 
   updateList(flightList: Flight[], page: string) {
     const departureDate = this.departureDate$.getValue();
-    flightList = flightList.filter(
-      (item) =>
-        new Date(item.departureDate) > new Date(departureDate) ||
-        new Date(item.departureDate) === new Date(departureDate)
-    );
+    const filterList = flightList.filter((item) => new Date(item.departureDate) > new Date(departureDate) || new Date(item.departureDate) === new Date(departureDate));
     const oldList = this.flightList$.getValue();
-    const newList = page === '1' || !oldList.length ? flightList : [...oldList, ...flightList.slice(oldList.length - 1, oldList.length + 9)];
+    console.log("🚀 ~ file: flight.service.ts ~ line 66 ~ FlightApi ~ updateList ~ page", page)
+    if (page === '1') {
+      this.flightList$.next(filterList);
+      return;
+    } 
+    const newList = [...oldList, ...filterList]
     this.flightList$.next(newList);
   }
 

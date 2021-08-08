@@ -3,7 +3,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as _moment from 'moment';
 import { FlightApi } from '../../../services/flight.service';
-import { IconService } from '../../../services/icon.service';
 import { City } from '../../../model/city';
 import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 const moment = _moment;
@@ -25,7 +24,7 @@ export class SearchFlightComponent implements OnInit {
     departureDate: new FormControl('', Validators.required),
     returnDate: new FormControl('')
   });
-  constructor(private flightApi: FlightApi, private iconService: IconService) {}
+  constructor(private flightApi: FlightApi) {}
 
   ngOnInit(): void {
     this.flightApi
