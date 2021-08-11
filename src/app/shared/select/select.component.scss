@@ -1,4 +1,5 @@
 @import "./../../../assets/styles/theme.scss";
+@import "./../../../assets/styles/mixin.scss";
 
 :host {
   width: 200px;
@@ -101,6 +102,16 @@
       width: 200px;
       width: auto;
       max-width: 200px;
+
+      @include width-small {
+        width: 160px;
+        max-width: 160px;
+      }
+
+      @include width-tiny {
+        width: 200px;
+        max-width: 200px;
+      }
     }
 
     .mat-select-panel ng-animating {
@@ -116,5 +127,15 @@
       max-height: 36px;
       line-height: 20px;
     }
+  }
+
+  @include width-small {
+    width: 160px;
+    max-width: 160px;
+  }
+
+  @include width-tiny {
+    width: 200px;
+    max-width: 200px;
   }
 }

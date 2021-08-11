@@ -9,10 +9,15 @@
   border-radius: 0;
   padding: 10px 0;
   margin: 0 8px;
+
+  @include width-small {
+    min-width: 130px;
+  }
 }
 
-$width-tiny: 375px;
-$width-small: 720px;
+$width-tiny: 360px;
+$width-small: 580px;
+$width-medium: 940px;
 
 @mixin width-tiny {
   @media (max-width: #{$width-tiny - 1px}) {
@@ -22,6 +27,12 @@ $width-small: 720px;
 
 @mixin width-small {
   @media (max-width: #{$width-small - 1px}) {
+    @content;
+  }
+}
+
+@mixin width-medium {
+  @media (max-width: #{$width-medium - 1px}) {
     @content;
   }
 }

@@ -5,11 +5,16 @@
   display: flex;
   justify-content: space-between;
 
-  app-booking-card {
+  &>* {
     width: calc(50% - 23px);
   }
 
-  app-flight-card {
-    width: calc(50% - 23px);
+
+  @include width-medium {
+    flex-direction: column;
+
+    &>* {
+      width: 100%;
+    }
   }
 }

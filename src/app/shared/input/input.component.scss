@@ -1,10 +1,22 @@
 @import "./../../../assets/styles/theme.scss";
+@import "./../../../assets/styles/mixin.scss";
 
 :host {
   width: 200px;
+  max-width: 200px;
   display: flex;
   flex: 1;
   flex-direction: column;
+
+  @include width-small {
+    width: 160px;
+    max-width: 160px;
+  }
+
+  @include width-tiny {
+    width: 200px;
+    max-width: 200px;
+  }
 }
 
 .label {
@@ -31,10 +43,6 @@
       opacity: 0.5;
     }
 
-    .mat-form-field-underline {
-      display: none;
-    }
-
     .mat-form-field-infix {
       padding: 0 !important;
       border: none;
@@ -43,10 +51,6 @@
     .mat-form-field-flex {
       height: 36px;
       width: 100%;
-    }
-
-    .mat-select-panel ng-animating {
-      visibility: hidden;
     }
 
     .mat-form-field-flex {

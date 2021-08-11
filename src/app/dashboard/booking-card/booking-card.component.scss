@@ -17,9 +17,33 @@
   flex-wrap: wrap;
   margin: calc(-1 * var(--gap)) 0 0 calc(-1 * var(--gap));
   width: calc(100% + var(--gap));
+  justify-content: center;
 
   &>* {
-    margin: var(--gap) 0 0 var(--gap);
+    display: flex;
+
+    @include width-tiny {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    &>* {
+      margin: var(--gap) 0 0 var(--gap);
+
+      @include width-tiny {
+        margin: 0;
+      }
+    }
+  }
+
+  @include width-small {
+    height: 200px;
+    overflow-y: auto;
+
+  }
+
+  @include width-tiny {
+    height: 150px;
   }
 }
 
@@ -53,5 +77,10 @@
         margin: 0 10px;
       }
     }
+  }
+
+  @include width-medium {
+    margin: 0;
+    padding: 8px;
   }
 }

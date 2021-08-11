@@ -15,58 +15,66 @@
     </div>
     <mat-card-content class="content">
       <div class="form-wrap">
-        <app-input
-          labelName="Imię"
-          placeholder="Wpisz imię"
-          [error]="getError('name')"
-          (onFocus)="controlsTouched('name')"
-          (changeInput)="setValue($event, 'name')"
-        ></app-input>
-        <app-input
-          labelName="Nazwisko"
-          placeholder="Wpisz nazwisko"
-          [error]="getError('lastName')"
-          (onFocus)="controlsTouched('lastName')"
-          (changeInput)="setValue($event, 'lastName')"
-        ></app-input>
-        <app-input
-          labelName="Ilość osób"
-          type="number"
-          [error]="getError('numberOfPeople')"
-          placeholder="Wybierz ilość osób"
-          (onFocus)="controlsTouched('numberOfPeople')"
-          (changeInput)="setValue($event, 'numberOfPeople')"
-        ></app-input>
-        <app-select
-          placeholder="Wybierz klase"
-          labelName="Klasa"
-          (onFocus)="controlsTouched('typeClass')"
-          [error]="getError('typeClass')"
-          [list]="classList"
-          (selectionChange)="setClass($event)"
-        ></app-select>
-        <app-datepicker
-          labelName="Data i godzina wylotu"
-          [disabled]="true"
-          [date]="departureDate"
-        ></app-datepicker>
-        <app-datepicker
-          labelName="Data i godzina przylotu"
-          [disabled]="true"
-          [date]="arrivalDate"
-        ></app-datepicker>
-        <app-select
-          labelName="Miejsce wylotu"
-          [disabled]="true"
-          [selected]="departureKey"
-          [list]="flightCity"
-        ></app-select>
-        <app-select
-          labelName="Miejsce przylotu"
-          [disabled]="true"
-          [selected]="arrivalKey"
-          [list]="flightCity"
-        ></app-select>
+        <div>
+          <app-input
+            labelName="Imię"
+            placeholder="Wpisz imię"
+            [error]="getError('name')"
+            (onFocus)="controlsTouched('name')"
+            (changeInput)="setValue($event, 'name')"
+          ></app-input>
+          <app-input
+            labelName="Nazwisko"
+            placeholder="Wpisz nazwisko"
+            [error]="getError('lastName')"
+            (onFocus)="controlsTouched('lastName')"
+            (changeInput)="setValue($event, 'lastName')"
+          ></app-input>
+        </div>
+        <div>
+          <app-input
+            labelName="Ilość osób"
+            type="number"
+            [error]="getError('numberOfPeople')"
+            placeholder="Wybierz ilość osób"
+            (onFocus)="controlsTouched('numberOfPeople')"
+            (changeInput)="setValue($event, 'numberOfPeople')"
+          ></app-input>
+          <app-select
+            placeholder="Wybierz klase"
+            labelName="Klasa"
+            (onFocus)="controlsTouched('typeClass')"
+            [error]="getError('typeClass')"
+            [list]="classList"
+            (selectionChange)="setClass($event)"
+          ></app-select>
+        </div>
+        <div>
+          <app-datepicker
+            labelName="Data i godzina wylotu"
+            [disabled]="true"
+            [date]="departureDate"
+          ></app-datepicker>
+          <app-datepicker
+            labelName="Data i godzina przylotu"
+            [disabled]="true"
+            [date]="arrivalDate"
+          ></app-datepicker>
+        </div>
+        <div>
+          <app-select
+            labelName="Miejsce wylotu"
+            [disabled]="true"
+            [selected]="departureKey"
+            [list]="flightCity"
+          ></app-select>
+          <app-select
+            labelName="Miejsce przylotu"
+            [disabled]="true"
+            [selected]="arrivalKey"
+            [list]="flightCity"
+          ></app-select>
+        </div>
       </div>
       <button class="booking-btn" [disabled]="!form.valid" mat-button>
         Dodaj do koszyka

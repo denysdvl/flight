@@ -56,6 +56,18 @@ const ARROW_LEFT_RIGHT = `
 <path fill-rule="evenodd" clip-rule="evenodd" d="M15 4.5C15 4.77614 14.7761 5 14.5 5L2.70711 5L5.85355 8.14645C6.04882 8.34171 6.04882 8.65829 5.85355 8.85355C5.65829 9.04882 5.34171 9.04882 5.14645 8.85355L1.14645 4.85355C0.951184 4.65829 0.951184 4.34171 1.14645 4.14645L5.14645 0.146447C5.34171 -0.0488155 5.65829 -0.0488155 5.85355 0.146447C6.04882 0.341709 6.04882 0.658292 5.85355 0.853554L2.70711 4L14.5 4C14.7761 4 15 4.22386 15 4.5Z" fill="#47A7FF"/>
 </svg>
 `;
+
+const DATETIME = `
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="0.5" width="15" height="15" rx="1.5" stroke="#47A7FF"/>
+<path d="M1 3.5H15" stroke="#47A7FF"/>
+<path d="M5.5 1.5L5.5 15.5" stroke="#47A7FF"/>
+<path d="M10.5 1.5L10.5 15.5" stroke="#47A7FF"/>
+<path d="M1 7.5H15" stroke="#47A7FF"/>
+<path d="M1 11.5H15" stroke="#47A7FF"/>
+<path d="M0 2C0 0.895431 0.895431 0 2 0H14C15.1046 0 16 0.895431 16 2V4H0V2Z" fill="#47A7FF"/>
+</svg>
+`;
 /**
  * @title SVG icons
  */
@@ -73,5 +85,6 @@ export class IconService  {
     iconRegistry.addSvgIconLiteral('arrow-right', sanitizer.bypassSecurityTrustHtml(ARROW_RIGHT));
     iconRegistry.addSvgIconLiteral('arrow-left', sanitizer.bypassSecurityTrustHtml(ARROW_LEFT));
     iconRegistry.addSvgIconLiteral('arrow-left-right', sanitizer.bypassSecurityTrustHtml(ARROW_LEFT_RIGHT));
+    iconRegistry.addSvgIconLiteral('datetime', sanitizer.bypassSecurityTrustHtml(DATETIME));
   }
 }

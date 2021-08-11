@@ -12,11 +12,6 @@
     color: $color-navbar;
   }
 
-  &-btn {
-    background-color: $btn-background-blue;
-    @include btn();
-  }
-
   &-spacer {
     flex: 1 1 auto;
   }
@@ -32,5 +27,35 @@
 
   .icon-btn {
     min-width: 36px;
+  }
+
+  &-btn {
+    background-color: $btn-background-blue;
+    @include btn();
+
+    @include width-small {
+      &.text-icon {
+        min-width: 36px;
+      }
+
+      .text {
+        display: none;
+      }
+
+      .icon.user {
+        margin-left: 0;
+      }
+    }
+
+  }
+
+  @include width-medium {
+    margin: 0;
+  }
+
+  @include width-tiny {
+    .group-btn {
+      display: none;
+    }
   }
 }

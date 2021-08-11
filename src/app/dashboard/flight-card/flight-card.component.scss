@@ -15,6 +15,14 @@
   height: 360px;
   overflow: auto;
 
+  @include width-small {
+    height: 180px;
+  }
+
+  @include width-tiny {
+    height: 130px;
+  }
+
   .wrap-item {
     display: flex;
     justify-content: flex-start;
@@ -28,7 +36,7 @@
     font-size: 14px;
     line-height: 16px;
     margin-left: 16px;
-    width: 130px;
+    width: 150px;
 
     &.arrow {
       display: none;
@@ -62,6 +70,10 @@
       &.date {
         margin-left: 36px;
         width: 130px;
+
+        @include width-tiny {
+          margin-left: 16px;
+        }
       }
 
       &.arrow {
@@ -103,4 +115,10 @@
     display: flex;
     justify-content: center;
   }
+
+  @include width-medium {
+    margin: 0;
+    padding: 8px;
+  }
+
 }
