@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FlightApi } from '../services/flight.service';
 import { IconService } from '../services/icon.service';
 
 @Component({
@@ -7,8 +8,9 @@ import { IconService } from '../services/icon.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private iconService: IconService) { }
+  constructor(private iconService: IconService, private flightApi: FlightApi) { }
 
   ngOnInit() {
+    this.flightApi.randomFlight();
   }
 }

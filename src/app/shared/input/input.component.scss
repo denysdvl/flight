@@ -1,0 +1,91 @@
+@import "./../../../assets/styles/theme.scss";
+
+:host {
+  width: 200px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 8px;
+}
+
+.error {
+  height: 14px;
+  line-height: 14px;
+  font-size: 10px;
+  width: 100%;
+  color: $error-color-input;
+}
+
+::ng-deep {
+  .mat-form-field.input {
+    height: 36px;
+    background: $background-color-input;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+
+    &.mat-form-field-disabled {
+      opacity: 0.5;
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+
+    .mat-form-field-infix {
+      padding: 0 !important;
+      border: none;
+    }
+
+    .mat-form-field-flex {
+      height: 36px;
+      width: 100%;
+    }
+
+    .mat-select-panel ng-animating {
+      visibility: hidden;
+    }
+
+    .mat-form-field-flex {
+      padding: 0 !important;
+      margin: 0 !important;
+      border-radius: 0px !important;
+      border: 1px solid $border-color-input;
+    }
+
+    .custom-option {
+      max-height: 36px;
+      line-height: 20px;
+    }
+
+    &.form-error {
+      .mat-form-field-flex {
+        border: 1px solid $error-color-input;
+      }
+
+      input.mat-input-element {
+        color: $error-color-input;
+
+        &::placeholder {
+          color: $error-color-input;
+        }
+      }
+    }
+  }
+
+  input.mat-input-element {
+    padding-left: 8px;
+    color: $color-input-value;
+    margin: 0;
+    line-height: 36px;
+
+    &::placeholder {
+      color: $color-placeholder-value;
+      font-size: 12px;
+      line-height: 14px;
+    }
+  }
+}

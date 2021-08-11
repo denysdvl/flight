@@ -1,0 +1,7 @@
+<app-booking-card
+  [arrivalKey]="arrivalKey"
+  [departureDate]="departureDate"
+  [departureKey]="departureKey"
+  [returnDate]="returnDate"
+></app-booking-card>
+<app-flight-card (clickItem)="bookingItem($event)"></app-flight-card>

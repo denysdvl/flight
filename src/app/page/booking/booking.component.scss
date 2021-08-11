@@ -1,0 +1,15 @@
+@import "./../../../assets/styles/theme.scss";
+@import "./../../../assets/styles/mixin.scss";
+
+:host {
+  display: flex;
+  justify-content: space-between;
+
+  app-booking-card {
+    width: calc(50% - 23px);
+  }
+
+  app-flight-card {
+    width: calc(50% - 23px);
+  }
+}

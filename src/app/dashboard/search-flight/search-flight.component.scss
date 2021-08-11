@@ -13,13 +13,19 @@
 
   .content {
     display: flex;
+    align-items: end;
+    justify-content: center;
+  }
 
-    &> :nth-child(n) {
-      margin-right: 16px;
-    }
+  .form-wrap {
+    --gap: 16px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: calc(-1 * var(--gap)) 0 0 calc(-1 * var(--gap));
+    width: calc(100% + var(--gap));
 
-    &> :last-child {
-      margin-right: 0;
+    &>* {
+      margin: var(--gap) 0 0 var(--gap);
     }
   }
 
@@ -35,10 +41,12 @@
   .icon-btn {
     min-width: 36px;
     max-height: 36px;
+    height: 36px;
     background-color: $btn-background-blue;
     font-size: 12px;
     line-height: 16px;
     padding: 0;
+    margin-left: 16px;
   }
 
   .mat-button-disabled {

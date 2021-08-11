@@ -1,38 +1,27 @@
 @import "./../../../assets/styles/theme.scss";
+@import "./../../../assets/styles/mixin.scss";
 
-::ng-deep {
-  .mat-list {
-    padding-top: 0;
-    height: 360px;
-    overflow: auto;
-  }
+.mat-list-item {
+  height: 36px !important;
+  cursor: pointer;
 
-  .mat-list-item {
-    height: 36px !important;
-    cursor: pointer;
-    &:nth-child(2n) {
-      background-color: $list-item-n2-background-color;
-    }
+  &:nth-child(2n) {
+    background-color: $list-item-n2-background-color;
   }
 }
 
-.list-card {
-  margin-top: 16px;
-  border-radius: 0;
-  box-shadow: none;
-  background-color: $background-form;
-  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-
-  .card-header {
-    font-size: 18px;
-    line-height: 21px;
-    margin-bottom: 16px;
-  }
+.mat-list {
+  padding-top: 0;
+  height: 360px;
+  overflow: auto;
 
   .wrap-item {
     display: flex;
     justify-content: flex-start;
     flex: 1;
+    height: inherit;
+    align-items: center;
+    text-align: center;
   }
 
   .item {
@@ -40,6 +29,10 @@
     line-height: 16px;
     margin-left: 16px;
     width: 130px;
+
+    &.arrow {
+      display: none;
+    }
 
     &:first-child {
       margin-left: 0;
@@ -61,18 +54,53 @@
     }
   }
 
+  &.min-list {
+    .item {
+      width: 35px;
+      margin: 0;
+
+      &.date {
+        margin-left: 36px;
+        width: 130px;
+      }
+
+      &.arrow {
+        display: flex;
+        width: 14px;
+        flex-direction: column;
+        margin: 0 12px;
+
+        .icon {
+          height: 9px;
+          width: 14px;
+        }
+      }
+    }
+  }
+
+}
+
+
+.list-card {
+  margin-top: 16px;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: $background-form;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+
+  .card-header {
+    font-size: 18px;
+    line-height: 21px;
+    margin-bottom: 16px;
+  }
+
   &-btn {
-    min-width: 159px;
-    font-weight: 700;
-    text-transform: uppercase;
+    @include btn();
     background-color: transparent;
     color: $btn-color-blue;
     margin: 0 auto;
     margin-top: 16px;
     display: flex;
     justify-content: center;
-    font-size: 12px;
-    line-height: 16px;
-    padding: 10px 0;
   }
 }

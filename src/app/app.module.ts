@@ -13,6 +13,9 @@ import { DatepickerComponent } from './shared/datepicker/datepicker.component';
 import { SearchFlightComponent } from './dashboard/search-flight/search-flight.component';
 import { FlightCardComponent } from './dashboard/flight-card/flight-card.component';
 import { HomeComponent } from './page/home/home.component';
+import { BookingComponent } from './page/booking/booking.component';
+import { InputComponent } from './shared/input/input.component';
+import { BookingCardComponent } from './dashboard/booking-card/booking-card.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { HomeComponent } from './page/home/home.component';
     DatepickerComponent,
     SearchFlightComponent,
     FlightCardComponent,
-    HomeComponent
+    HomeComponent,
+    BookingComponent,
+    InputComponent,
+    BookingCardComponent
   ],
   imports: [
     BrowserModule,

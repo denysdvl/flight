@@ -1,7 +1,14 @@
-<mat-form-field appearance="outline">
+<span class="label" *ngIf="labelName.length">{{ labelName }}</span>
+<mat-form-field
+  class="select"
+  [class.form-error]="error.length"
+  appearance="outline"
+>
   <mat-select
     [placeholder]="placeholder"
     [disabled]="disabled"
+    [(value)]="selected"
+    on-blur="onFocus.emit(true)"
     (selectionChange)="selecting($event.value)"
   >
     <ng-container *ngFor="let item of list">
@@ -10,9 +17,12 @@
         [disabled]="item.disabled"
         [value]="item.key"
       >
-        {{ item.name }} ({{ item.key }})
+        <ng-container *ngIf="item.name !== item.key; else itemKey">
+          {{ item.name }} ({{ item.key }})
+        </ng-container>
+        <ng-template #itemKey>{{ item.key }}</ng-template>
       </mat-option>
     </ng-container>
   </mat-select>
 </mat-form-field>
-<div class="error"></div>
+<span class="error">{{ error }}</span>

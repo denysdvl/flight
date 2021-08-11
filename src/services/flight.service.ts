@@ -14,12 +14,16 @@ const moment = _moment;
 export class FlightApi {
   private flightList$ = new BehaviorSubject<Flight[]>([]);
   private flightParam$ = new BehaviorSubject<HttpParams>(new HttpParams());
-  private departureDate$ = new BehaviorSubject<string>(moment(new Date()).format('YYYY-MM-DD HH:mm'));
+  private departureDate$ = new BehaviorSubject<string>(
+    moment(new Date()).format('YYYY-MM-DD HH:mm')
+  );
+  private pageList = 1;
   constructor(private apiService: ApiService) {}
 
   getCity(): Observable<City[]> {
     return this.apiService.get<City[]>('city').pipe(
-      map(city => city.map(item => {
+      map((city) =>
+        city.map((item) => {
           return { ...item, disabled: false };
         })
       )
@@ -30,49 +34,53 @@ export class FlightApi {
     arrival: string,
     departure: string,
     departureDate: string,
-    returnDate: string,
-    page = 1
+    returnDate: string
   ): void {
+    this.pageList = 1;
     const params = new HttpParams()
       .set('_sort', 'departureDate')
-      .set('_page', '1')
+      .set('_page', this.pageList.toString())
       .set('departure', departure)
       .set('arrival', arrival);
     this.departureDate$.next(departureDate);
     this.flightParam$.next(params);
-    this.getFlight(params).pipe(tap((flightList) => {
-      console.log("🚀 ~ file: flight.service.ts ~ line 45 ~ FlightApi ~ this.getFlight ~ flightList", flightList)
-      this.updateList(flightList, page.toString())
-    })).subscribe();
+    this.getFlight(params).subscribe(this.updateList.bind(this));
   }
 
-  randomFlight(page: number): void {
+  randomFlight(): void {
+    this.pageList = 1;
     const params = new HttpParams()
       .set('_sort', 'departureDate')
-      .set('_page', '1');
+      .set('_page', this.pageList.toString());
     this.flightParam$.next(params);
-    this.getFlight(params).pipe(tap((flightList) => this.updateList(flightList, page.toString()))).subscribe();
+    this.getFlight(params).subscribe(this.updateList.bind(this));
   }
 
-  nextPage(page: number): void {
-    const params = this.flightParam$.getValue();
-    this.getFlight(params).pipe(tap((flightList) => this.updateList(flightList, page.toString()))).subscribe();
+  nextPage(): void {
+    ++this.pageList;
+    const params = this.flightParam$
+      .getValue()
+      .set('_page', this.pageList.toString());
+    this.getFlight(params).subscribe(this.updateList.bind(this));
   }
 
   getFlight(params: HttpParams): Observable<Flight[]> {
     return this.apiService.get<Flight[]>('flight', { params: params });
   }
 
-  updateList(flightList: Flight[], page: string) {
+  updateList(flightList: Flight[]) {
     const departureDate = this.departureDate$.getValue();
-    const filterList = flightList.filter((item) => new Date(item.departureDate) > new Date(departureDate) || new Date(item.departureDate) === new Date(departureDate));
+    const filterList = flightList.filter(
+      (item) =>
+        new Date(item.departureDate) > new Date(departureDate) ||
+        new Date(item.departureDate) === new Date(departureDate)
+    );
     const oldList = this.flightList$.getValue();
-    console.log("🚀 ~ file: flight.service.ts ~ line 66 ~ FlightApi ~ updateList ~ page", page)
-    if (page === '1') {
+    if (this.pageList === 1) {
       this.flightList$.next(filterList);
       return;
-    } 
-    const newList = [...oldList, ...filterList]
+    }
+    const newList = [...oldList, ...filterList];
     this.flightList$.next(newList);
   }
 

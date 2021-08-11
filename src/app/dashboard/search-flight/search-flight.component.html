@@ -1,35 +1,30 @@
-<form class="example-form" [formGroup]="form" (ngSubmit)="submit()">
+<form class="search-form" [formGroup]="form" (ngSubmit)="submit()">
   <mat-card class="form-card" *ngIf="flightCity.length">
     <div class="card-header">Wyszukaj loty</div>
     <mat-card-content class="content">
-      <app-select
-        placeholder="Miejsce wylotu"
-        [list]="flightCity"
-        (selectionChange)="setCity($event, 'departure')"
-      >
-      </app-select>
-      <app-select
-        placeholder="Miejsce przylotu"
-        [list]="flightCity"
-        (selectionChange)="setCity($event, 'arrival')"
-      >
-      </app-select>
-  
-      <app-datepicker
-        placeholder="data wylotu"
-        (selectDate)="setDepartureDate($event)"
-      >
-      </app-datepicker>
-  
-      <app-datepicker
-        placeholder="data powrotu"
-        [minDate]="minDate"
-        [error]="errorReturnDate"
-        [disabled]="!form.get('departureDate')?.value.length"
-        (selectDate)="setReturnDate($event)"
-      >
-      </app-datepicker>
-  
+      <div class="form-wrap">
+        <app-select
+          placeholder="Miejsce wylotu"
+          [list]="flightCity"
+          (selectionChange)="setCity($event, 'departure')"
+        ></app-select>
+        <app-select
+          placeholder="Miejsce przylotu"
+          [list]="flightCity"
+          (selectionChange)="setCity($event, 'arrival')"
+        ></app-select>
+        <app-datepicker
+          placeholder="Data i godzina wylotu"
+          (selectDate)="setDepartureDate($event)"
+        ></app-datepicker>
+        <app-datepicker
+          placeholder="Data i godzina przylotu"
+          [minDate]="minDate"
+          [error]="errorReturnDate"
+          [disabled]="!form.get('departureDate')?.value.length"
+          (selectDate)="setReturnDate($event)"
+        ></app-datepicker>
+      </div>
       <button class="form-card icon-btn" [disabled]="!form.valid" mat-button>
         <mat-icon
           svgIcon="search"

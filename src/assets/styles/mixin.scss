@@ -1,0 +1,27 @@
+@import './theme.scss';
+
+@mixin btn() {
+  min-width: 159px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 0;
+  padding: 10px 0;
+  margin: 0 8px;
+}
+
+$width-tiny: 375px;
+$width-small: 720px;
+
+@mixin width-tiny {
+  @media (max-width: #{$width-tiny - 1px}) {
+    @content;
+  }
+}
+
+@mixin width-small {
+  @media (max-width: #{$width-small - 1px}) {
+    @content;
+  }
+}

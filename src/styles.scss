@@ -14,7 +14,20 @@ body {
   margin-top: 35px;
 }
 
-.mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
+.mat-select-panel .mat-optgroup-label,
+.mat-select-panel .mat-option {
   height: 36px !important;
   line-height: 36px !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

@@ -1,0 +1,18 @@
+<span class="label">{{ labelName }}</span>
+<mat-form-field
+  class="input"
+  [class.form-error]="error.length"
+  appearance="fill"
+>
+  <input
+    [type]="type"
+    matInput
+    [disabled]="disabled"
+    autocomplete="off"
+    [placeholder]="placeholder"
+    type="text"
+    on-blur="onFocus.emit(true)"
+    (input)="valueChange($event)"
+  />
+</mat-form-field>
+<span class="error">{{ error }}</span>

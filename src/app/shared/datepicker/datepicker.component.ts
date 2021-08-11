@@ -12,7 +12,9 @@ const moment = _moment;
 export class DatepickerComponent implements OnInit {
   @Input() placeholder = '';
   @Input() disabled = false;
+  @Input() labelName = '';
   @Input() error = '';
+  @Input() date: Date;
   @Output() selectDate: EventEmitter<Date> = new EventEmitter();
   @Input() minDate: Date = new Date();
   constructor() {}

@@ -1,0 +1,76 @@
+<mat-card class="list-card">
+  <form class="booking-form" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="card-header">
+      Rezerwacja lotu
+      <div class="key-city">
+        {{ departureKey }}
+        <mat-icon
+          svgIcon="arrow-left-right"
+          class="icon"
+          aria-hidden="false"
+          aria-label="arrow left right SVG icon"
+        ></mat-icon>
+        {{ arrivalKey }}
+      </div>
+    </div>
+    <mat-card-content class="content">
+      <div class="form-wrap">
+        <app-input
+          labelName="Imię"
+          placeholder="Wpisz imię"
+          [error]="getError('name')"
+          (onFocus)="controlsTouched('name')"
+          (changeInput)="setValue($event, 'name')"
+        ></app-input>
+        <app-input
+          labelName="Nazwisko"
+          placeholder="Wpisz nazwisko"
+          [error]="getError('lastName')"
+          (onFocus)="controlsTouched('lastName')"
+          (changeInput)="setValue($event, 'lastName')"
+        ></app-input>
+        <app-input
+          labelName="Ilość osób"
+          type="number"
+          [error]="getError('numberOfPeople')"
+          placeholder="Wybierz ilość osób"
+          (onFocus)="controlsTouched('numberOfPeople')"
+          (changeInput)="setValue($event, 'numberOfPeople')"
+        ></app-input>
+        <app-select
+          placeholder="Wybierz klase"
+          labelName="Klasa"
+          (onFocus)="controlsTouched('typeClass')"
+          [error]="getError('typeClass')"
+          [list]="classList"
+          (selectionChange)="setClass($event)"
+        ></app-select>
+        <app-datepicker
+          labelName="Data i godzina wylotu"
+          [disabled]="true"
+          [date]="departureDate"
+        ></app-datepicker>
+        <app-datepicker
+          labelName="Data i godzina przylotu"
+          [disabled]="true"
+          [date]="returnDate"
+        ></app-datepicker>
+        <app-select
+          labelName="Miejsce wylotu"
+          [disabled]="true"
+          [selected]="departureKey"
+          [list]="flightCity"
+        ></app-select>
+        <app-select
+          labelName="Miejsce przylotu"
+          [disabled]="true"
+          [selected]="arrivalKey"
+          [list]="flightCity"
+        ></app-select>
+      </div>
+      <button class="booking-btn" [disabled]="!form.valid" mat-button>
+        Dodaj do koszyka
+      </button>
+    </mat-card-content>
+  </form>
+</mat-card>

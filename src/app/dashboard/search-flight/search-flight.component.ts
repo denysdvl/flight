@@ -4,7 +4,12 @@ import { takeUntil } from 'rxjs/operators';
 import * as _moment from 'moment';
 import { FlightApi } from '../../../services/flight.service';
 import { City } from '../../../model/city';
-import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { SelectList } from '../../shared/select/select.component';
 const moment = _moment;
 
 @Component({
@@ -22,7 +27,7 @@ export class SearchFlightComponent implements OnInit {
     departure: new FormControl('', Validators.required),
     arrival: new FormControl('', Validators.required),
     departureDate: new FormControl('', Validators.required),
-    returnDate: new FormControl('')
+    returnDate: new FormControl(''),
   });
   constructor(private flightApi: FlightApi) {}
 
@@ -36,12 +41,14 @@ export class SearchFlightComponent implements OnInit {
   }
 
   randomDate(start: Date, end: Date) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    return new Date(
+      start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    );
   }
 
-  setCity(city: City, formControl: string) {
+  setCity(city: SelectList, formControl: string) {
     this.form.patchValue({
-      [formControl]: `${city.name} (${city.key})`, 
+      [formControl]: `${city.name} (${city.key})`,
     });
     this.disabledCity(city.key);
   }
@@ -55,41 +62,51 @@ export class SearchFlightComponent implements OnInit {
   setDepartureDate(date: Date) {
     if (!date) {
       this.form.patchValue({
-        departureDate: '', 
-        returnDate: '', 
+        departureDate: '',
+        returnDate: '',
       });
       this.minDate = new Date();
       return;
     }
     this.form.patchValue({
-      departureDate: moment(date).format('YYYY-MM-DD HH:mm'), 
+      departureDate: moment(date).format('YYYY-MM-DD HH:mm'),
     });
     this.minDate = date;
     this.setErrorForDate();
   }
 
   setErrorForDate() {
-    this.errorReturnDate = ''
+    this.errorReturnDate = '';
     const returnDate = this.form.get('returnDate');
     const departureDate = this.form.get('departureDate');
-    if (returnDate && departureDate && returnDate.value.length && new Date(departureDate.value) > new Date(returnDate.value)) {
+    if (
+      returnDate &&
+      departureDate &&
+      returnDate.value.length &&
+      new Date(departureDate.value) > new Date(returnDate.value)
+    ) {
       this.errorReturnDate = 'Data przylotu nie może być wcześniejsza.';
-      this.form.get('returnDate')?.setErrors({'msg': this.errorReturnDate});
+      this.form.get('returnDate')?.setErrors({ msg: this.errorReturnDate });
     }
   }
 
   setReturnDate(date: Date) {
     this.form.patchValue({
-      returnDate: moment(date).format('YYYY-MM-DD HH:mm'), 
+      returnDate: moment(date).format('YYYY-MM-DD HH:mm'),
     });
     this.setErrorForDate();
   }
 
   searchFlight() {
     const formData = {
-      ...this.form.value
-    }
-    this.flightApi.filterFlight(formData.arrival, formData.departure, formData.departureDate, formData.returnDate);
+      ...this.form.value,
+    };
+    this.flightApi.filterFlight(
+      formData.arrival,
+      formData.departure,
+      formData.departureDate,
+      formData.returnDate
+    );
   }
 
   submit() {

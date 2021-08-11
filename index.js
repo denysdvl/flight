@@ -1,4 +1,4 @@
-var _moment = require('moment')
+var _moment = require("moment");
 
 module.exports = () => {
   const moment = _moment;
@@ -15,26 +15,38 @@ module.exports = () => {
     { id: 10, name: "Szczecin", key: "SZZ" },
     { id: 11, name: "Warszawa", key: "WAW" },
     { id: 12, name: "Wrocław", key: "WRO" },
-    { id: 13, name: "Zielona Góra", key: "IEG" }
-  ]
-  const data = { city: [], flight: [] }
+    { id: 13, name: "Zielona Góra", key: "IEG" },
+  ];
+  const data = { city: [], flight: [] };
 
-  city.forEach(item => {
+  city.forEach((item) => {
     data.city.push(item);
-  })
+  });
   for (let i = 0; i < 2000; i++) {
-    let arrivalId = 0
-    let departureId = 0
+    let arrivalId = 0;
+    let departureId = 0;
     do {
-      arrivalId = Math.floor(Math.random()*(city.length));
-      departureId = Math.floor(Math.random()*(city.length));
-    } while (arrivalId === departureId) 
+      arrivalId = Math.floor(Math.random() * city.length);
+      departureId = Math.floor(Math.random() * city.length);
+    } while (arrivalId === departureId);
     const arrivalRandomCity = city[arrivalId];
     const departureRandomCity = city[departureId];
-    const randomDate = moment(new Date(new Date(2021, 9, 10).getTime() + Math.random() * (new Date().getTime() - new Date(2021, 9, 10).getTime())));
-    const date = randomDate.format('YYYY-MM-DD HH:mm');
-    const newItem = {departure: `${departureRandomCity.name} (${departureRandomCity.key})`, arrival: `${arrivalRandomCity.name} (${arrivalRandomCity.key})`, departureDate: date}
-    data.flight.push(newItem)
+    const randomDate = moment(
+      new Date(
+        new Date(2021, 9, 10).getTime() +
+          Math.random() *
+            (new Date().getTime() - new Date(2021, 9, 10).getTime())
+      )
+    );
+    const date = randomDate.format("YYYY-MM-DD HH:mm");
+    const newItem = {
+      departure: `${departureRandomCity.name} (${departureRandomCity.key})`,
+      departureKey: departureRandomCity.key,
+      arrival: `${arrivalRandomCity.name} (${arrivalRandomCity.key})`,
+      arrivalKey: arrivalRandomCity.key,
+      departureDate: date,
+    };
+    data.flight.push(newItem);
   }
-  return data
-}
+  return data;
+};

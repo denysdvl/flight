@@ -32,11 +32,29 @@ const SEARCH = `
 </svg>
 `;
 
-const ARROW_RIGHT = `
+const ARROW_RIGHT_8 = `
 <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 4C0 4.27614 0.223858 4.5 0.5 4.5H6.29289L4.14645 6.64645C3.95118 6.84171 3.95118 7.15829 4.14645 7.35355C4.34171 7.54882 4.65829 7.54882 4.85355 7.35355L7.85355 4.35355C8.04882 4.15829 8.04882 3.84171 7.85355 3.64645L4.85355 0.646447C4.65829 0.451184 4.34171 0.451184 4.14645 0.646447C3.95118 0.841709 3.95118 1.15829 4.14645 1.35355L6.29289 3.5L0.5 3.5C0.223858 3.5 0 3.72386 0 4Z" fill="black"/>
 </svg>
+`;
 
+const ARROW_LEFT = `
+<svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14 4.5C14 4.77614 13.7761 5 13.5 5L1.70711 5L4.85355 8.14645C5.04882 8.34171 5.04882 8.65829 4.85355 8.85355C4.65829 9.04882 4.34171 9.04882 4.14645 8.85355L0.146446 4.85355C-0.0488157 4.65829 -0.0488157 4.34171 0.146446 4.14645L4.14645 0.146447C4.34171 -0.0488155 4.65829 -0.0488155 4.85355 0.146447C5.04882 0.341709 5.04882 0.658292 4.85355 0.853554L1.70711 4L13.5 4C13.7761 4 14 4.22386 14 4.5Z" fill="black" fill-opacity="0.8"/>
+</svg>
+`
+
+const ARROW_RIGHT = `
+<svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 4.5C0 4.77614 0.223858 5 0.5 5L12.2929 5L9.14645 8.14645C8.95118 8.34171 8.95118 8.65829 9.14645 8.85355C9.34171 9.04882 9.65829 9.04882 9.85355 8.85355L13.8536 4.85355C14.0488 4.65829 14.0488 4.34171 13.8536 4.14645L9.85355 0.146447C9.65829 -0.0488155 9.34171 -0.0488155 9.14645 0.146447C8.95118 0.341709 8.95118 0.658292 9.14645 0.853554L12.2929 4L0.5 4C0.223858 4 0 4.22386 0 4.5Z" fill="black" fill-opacity="0.8"/>
+</svg>
+`;
+
+const ARROW_LEFT_RIGHT = `
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1 11.5C1 11.7761 1.22386 12 1.5 12H13.2929L10.1464 15.1464C9.95118 15.3417 9.95118 15.6583 10.1464 15.8536C10.3417 16.0488 10.6583 16.0488 10.8536 15.8536L14.8536 11.8536C15.0488 11.6583 15.0488 11.3417 14.8536 11.1464L10.8536 7.14645C10.6583 6.95118 10.3417 6.95118 10.1464 7.14645C9.95118 7.34171 9.95118 7.65829 10.1464 7.85355L13.2929 11H1.5C1.22386 11 1 11.2239 1 11.5Z" fill="#47A7FF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15 4.5C15 4.77614 14.7761 5 14.5 5L2.70711 5L5.85355 8.14645C6.04882 8.34171 6.04882 8.65829 5.85355 8.85355C5.65829 9.04882 5.34171 9.04882 5.14645 8.85355L1.14645 4.85355C0.951184 4.65829 0.951184 4.34171 1.14645 4.14645L5.14645 0.146447C5.34171 -0.0488155 5.65829 -0.0488155 5.85355 0.146447C6.04882 0.341709 6.04882 0.658292 5.85355 0.853554L2.70711 4L14.5 4C14.7761 4 15 4.22386 15 4.5Z" fill="#47A7FF"/>
+</svg>
 `;
 /**
  * @title SVG icons
@@ -47,11 +65,13 @@ const ARROW_RIGHT = `
 })
 export class IconService  {
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    console.log('init icon');
     iconRegistry.addSvgIconLiteral('user-icon', sanitizer.bypassSecurityTrustHtml(USER_ICON));
     iconRegistry.addSvgIconLiteral('shopping-cart', sanitizer.bypassSecurityTrustHtml(SHOPPING_CART));
     iconRegistry.addSvgIconLiteral('calendar-cart', sanitizer.bypassSecurityTrustHtml(CALENDAR_CART));
     iconRegistry.addSvgIconLiteral('search', sanitizer.bypassSecurityTrustHtml(SEARCH));
+    iconRegistry.addSvgIconLiteral('arrow-right-8', sanitizer.bypassSecurityTrustHtml(ARROW_RIGHT_8));
     iconRegistry.addSvgIconLiteral('arrow-right', sanitizer.bypassSecurityTrustHtml(ARROW_RIGHT));
+    iconRegistry.addSvgIconLiteral('arrow-left', sanitizer.bypassSecurityTrustHtml(ARROW_LEFT));
+    iconRegistry.addSvgIconLiteral('arrow-left-right', sanitizer.bypassSecurityTrustHtml(ARROW_LEFT_RIGHT));
   }
 }

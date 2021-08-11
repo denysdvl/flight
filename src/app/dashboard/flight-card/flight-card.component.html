@@ -1,22 +1,36 @@
 <mat-card class="list-card">
   <div class="card-header">Lista lotów</div>
-  <mat-card-content class="content">
-    <mat-list role="list">
+  <mat-card-content #contentList class="content">
+    <mat-list [class.min-list]="isMinSize" role="list">
       <ng-container *ngFor="let item of flightList$ | async">
-        <mat-list-item role="flightList">
+        <mat-list-item role="flightList" (click)="selectItem(item)">
           <div class="wrap-item">
             <span class="item">
-              {{ item.departure }}
+              {{ isMinSize ? item.departureKey : item.departure }}
+            </span>
+            <span class="item arrow">
+              <mat-icon
+                svgIcon="arrow-left"
+                class="icon"
+                aria-hidden="false"
+                aria-label="arrow left SVG icon"
+              ></mat-icon>
+              <mat-icon
+                svgIcon="arrow-right"
+                class="icon"
+                aria-hidden="false"
+                aria-label="arrow right SVG icon"
+              ></mat-icon>
             </span>
             <span class="item">
-              {{ item.arrival }}
+              {{ isMinSize ? item.arrivalKey : item.arrival }}
             </span>
-            <span class="item">
+            <span class="item date">
               {{ item.departureDate }}
             </span>
             <span class="wrap-icon">
               <mat-icon
-                svgIcon="arrow-right"
+                svgIcon="arrow-right-8"
                 class="icon"
                 aria-hidden="false"
                 aria-label="arrow right SVG icon"
@@ -26,6 +40,8 @@
         </mat-list-item>
       </ng-container>
     </mat-list>
-    <button class="list-card-btn" (click)="nextPage()" mat-button>Załaduj więcej</button>
+    <button class="list-card-btn" (click)="nextPage()" mat-button>
+      Załaduj więcej
+    </button>
   </mat-card-content>
 </mat-card>

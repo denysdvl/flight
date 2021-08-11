@@ -1,6 +1,7 @@
 /* palette */
 $red-primary: #BA0000;
-$white: #FFFFFF;;
+$white: #FFFFFF;
+;
 $black: #000000;
 $gray: #989898;
 $gray-secondary: #F8F8F8;
@@ -20,6 +21,15 @@ $border-color-select: $blue-primary;
 $color-selected-value: $blue-primary;
 $disabled-border-color-select: $gray;
 $background-color-select: $white;
+$error-color-select: $red-primary;
+
+/* input */
+$border-color-input: $blue-primary;
+$color-input-value: $blue-primary;
+$color-placeholder-value: rgba($black, .6);
+$disabled-border-color-input: $gray;
+$background-color-input: $white;
+$error-color-input: $red-primary;
 
 /* datepicker */
 $border-color-datepicker: $blue-primary;
@@ -32,6 +42,7 @@ $background-color-datepicker: $white;
 /* btn */
 $btn-background-blue: $blue-secondary;
 $btn-color-blue: $blue-secondary;
+$btn-color-white: $white;
 
 /* list */
 $list-icon-border-color: $black;

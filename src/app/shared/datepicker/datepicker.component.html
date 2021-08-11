@@ -1,13 +1,23 @@
-<mat-form-field class="datepicker-form" [class.form-error]="error.length" (click)="picker.open()">
+<span class="label" *ngIf="labelName.length">{{ labelName }}</span>
+<mat-form-field
+  class="datepicker-form"
+  [class.form-error]="error.length"
+  (click)="picker.open()"
+>
   <mat-label>{{ placeholder }}</mat-label>
   <input
     matInput
     autocomplete="off"
     [min]="minDate"
     [disabled]="disabled"
+    [value]="date"
     [ngxMatDatetimePicker]="picker"
     (dateChange)="dateChange($event.value)"
   />
-  <ngx-mat-datetime-picker [stepHour]="1" [stepMinute]="5" #picker></ngx-mat-datetime-picker>
+  <ngx-mat-datetime-picker
+    [stepHour]="1"
+    [stepMinute]="5"
+    #picker
+  ></ngx-mat-datetime-picker>
 </mat-form-field>
-<div class="error">{{error}}</div>
+<div class="error">{{ error }}</div>
