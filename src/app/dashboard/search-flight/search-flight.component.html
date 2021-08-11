@@ -20,9 +20,9 @@
         <app-datepicker
           placeholder="Data i godzina przylotu"
           [minDate]="minDate"
-          [error]="errorReturnDate"
+          [error]="errorarrivalDate"
           [disabled]="!form.get('departureDate')?.value.length"
-          (selectDate)="setReturnDate($event)"
+          (selectDate)="setarrivalDate($event)"
         ></app-datepicker>
       </div>
       <button class="form-card icon-btn" [disabled]="!form.valid" mat-button>

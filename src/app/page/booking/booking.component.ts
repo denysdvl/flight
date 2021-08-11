@@ -14,7 +14,7 @@ export class BookingComponent implements OnInit, OnDestroy {
   arrivalKey = '';
   departureDate: Date;
   departureKey = '';
-  returnDate: Date;
+  arrivalDate: Date;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -25,9 +25,7 @@ export class BookingComponent implements OnInit, OnDestroy {
         this.arrivalKey = bookingItem.arrivalKey;
         this.departureKey = bookingItem.departureKey;
         this.departureDate = new Date(bookingItem.departureDate);
-        this.returnDate = bookingItem.returnDate
-          ? new Date(bookingItem.departureDate)
-          : new Date();
+        this.arrivalDate = new Date(bookingItem.arrivalDate);
       });
   }
 

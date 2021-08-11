@@ -17,6 +17,7 @@ export class FlightApi {
   private departureDate$ = new BehaviorSubject<string>(
     moment(new Date()).format('YYYY-MM-DD HH:mm')
   );
+  private bookingFlight$ = new BehaviorSubject<number>(2);
   private pageList = 1;
   constructor(private apiService: ApiService) {}
 
@@ -30,11 +31,16 @@ export class FlightApi {
     );
   }
 
+  sendBookingFlight() {
+    const newCounter = this.bookingFlight$.getValue() + 1;
+    this.bookingFlight$.next(newCounter);
+  }
+
   filterFlight(
     arrival: string,
     departure: string,
     departureDate: string,
-    returnDate: string
+    arrivalDate: string
   ): void {
     this.pageList = 1;
     const params = new HttpParams()
@@ -44,7 +50,7 @@ export class FlightApi {
       .set('arrival', arrival);
     this.departureDate$.next(departureDate);
     this.flightParam$.next(params);
-    this.getFlight(params).subscribe(this.updateList.bind(this));
+    this.setFlight(params);
   }
 
   randomFlight(): void {
@@ -53,7 +59,7 @@ export class FlightApi {
       .set('_sort', 'departureDate')
       .set('_page', this.pageList.toString());
     this.flightParam$.next(params);
-    this.getFlight(params).subscribe(this.updateList.bind(this));
+    this.setFlight(params);
   }
 
   nextPage(): void {
@@ -61,11 +67,13 @@ export class FlightApi {
     const params = this.flightParam$
       .getValue()
       .set('_page', this.pageList.toString());
-    this.getFlight(params).subscribe(this.updateList.bind(this));
+    this.setFlight(params);
   }
 
-  getFlight(params: HttpParams): Observable<Flight[]> {
-    return this.apiService.get<Flight[]>('flight', { params: params });
+  setFlight(params: HttpParams): void {
+    this.apiService
+      .get<Flight[]>('flight', { params: params })
+      .subscribe(this.updateList.bind(this));
   }
 
   updateList(flightList: Flight[]) {
@@ -86,5 +94,9 @@ export class FlightApi {
 
   getFlightList(): Observable<Flight[]> {
     return this.flightList$.asObservable();
+  }
+
+  getBookingFlight(): Observable<number> {
+    return this.bookingFlight$.asObservable();
   }
 }

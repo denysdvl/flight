@@ -9,7 +9,7 @@
         class="icon"
         aria-hidden="false"
         aria-label="shopping cart SVG icon"
-        matBadge="2"
+        [matBadge]="bookingFlight$ | async"
         matBadgeColor="warn"
         matBadgeSize="small"
       ></mat-icon>

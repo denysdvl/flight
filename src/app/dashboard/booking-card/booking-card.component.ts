@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { City } from '../../../model/city';
@@ -20,7 +20,7 @@ export class BookingCardComponent implements OnInit {
   @Input() arrivalKey = '';
   @Input() departureDate: Date;
   @Input() departureKey = '';
-  @Input() returnDate: Date;
+  @Input() arrivalDate: Date;
   classList = [{ id: 1, key: 'Biznesowa', name: 'Biznesowa', disabled: false }];
   form: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -28,11 +28,7 @@ export class BookingCardComponent implements OnInit {
     numberOfPeople: new FormControl('', Validators.required),
     typeClass: new FormControl('', Validators.required),
   });
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private flightApi: FlightApi
-  ) {}
+  constructor(private router: Router, private flightApi: FlightApi) {}
 
   ngOnInit() {
     this.flightApi
@@ -59,9 +55,7 @@ export class BookingCardComponent implements OnInit {
   }
 
   submit() {
-    const formData = {
-      ...this.form.value,
-    };
+    this.flightApi.sendBookingFlight();
   }
 
   getError(formControl: string): string {

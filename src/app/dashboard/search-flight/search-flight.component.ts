@@ -4,11 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import * as _moment from 'moment';
 import { FlightApi } from '../../../services/flight.service';
 import { City } from '../../../model/city';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SelectList } from '../../shared/select/select.component';
 const moment = _moment;
 
@@ -22,12 +18,12 @@ export class SearchFlightComponent implements OnInit {
   moment = _moment;
   minDate: Date = new Date();
   destroy$ = new Subject();
-  errorReturnDate = '';
+  errorarrivalDate = '';
   form: FormGroup = new FormGroup({
     departure: new FormControl('', Validators.required),
     arrival: new FormControl('', Validators.required),
     departureDate: new FormControl('', Validators.required),
-    returnDate: new FormControl(''),
+    arrivalDate: new FormControl(''),
   });
   constructor(private flightApi: FlightApi) {}
 
@@ -63,7 +59,7 @@ export class SearchFlightComponent implements OnInit {
     if (!date) {
       this.form.patchValue({
         departureDate: '',
-        returnDate: '',
+        arrivalDate: '',
       });
       this.minDate = new Date();
       return;
@@ -76,23 +72,23 @@ export class SearchFlightComponent implements OnInit {
   }
 
   setErrorForDate() {
-    this.errorReturnDate = '';
-    const returnDate = this.form.get('returnDate');
+    this.errorarrivalDate = '';
+    const arrivalDate = this.form.get('arrivalDate');
     const departureDate = this.form.get('departureDate');
     if (
-      returnDate &&
+      arrivalDate &&
       departureDate &&
-      returnDate.value.length &&
-      new Date(departureDate.value) > new Date(returnDate.value)
+      arrivalDate.value.length &&
+      new Date(departureDate.value) > new Date(arrivalDate.value)
     ) {
-      this.errorReturnDate = 'Data przylotu nie może być wcześniejsza.';
-      this.form.get('returnDate')?.setErrors({ msg: this.errorReturnDate });
+      this.errorarrivalDate = 'Data przylotu nie może być wcześniejsza.';
+      this.form.get('arrivalDate')?.setErrors({ msg: this.errorarrivalDate });
     }
   }
 
-  setReturnDate(date: Date) {
+  setarrivalDate(date: Date) {
     this.form.patchValue({
-      returnDate: moment(date).format('YYYY-MM-DD HH:mm'),
+      arrivalDate: moment(date).format('YYYY-MM-DD HH:mm'),
     });
     this.setErrorForDate();
   }
@@ -105,7 +101,7 @@ export class SearchFlightComponent implements OnInit {
       formData.arrival,
       formData.departure,
       formData.departureDate,
-      formData.returnDate
+      formData.arrivalDate
     );
   }
 

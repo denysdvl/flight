@@ -39,12 +39,14 @@ module.exports = () => {
       )
     );
     const date = randomDate.format("YYYY-MM-DD HH:mm");
+    const arrivalDate = randomDate.add(3, 'hours').format("YYYY-MM-DD HH:mm");
     const newItem = {
       departure: `${departureRandomCity.name} (${departureRandomCity.key})`,
       departureKey: departureRandomCity.key,
       arrival: `${arrivalRandomCity.name} (${arrivalRandomCity.key})`,
       arrivalKey: arrivalRandomCity.key,
       departureDate: date,
+      arrivalDate: arrivalDate,
     };
     data.flight.push(newItem);
   }
