@@ -33,9 +33,9 @@ module.exports = () => {
     const departureRandomCity = city[departureId];
     const randomDate = moment(
       new Date(
-        new Date(2021, 9, 10).getTime() +
+        new Date(2021, 9, 20).getTime() +
           Math.random() *
-            (new Date().getTime() - new Date(2021, 9, 10).getTime())
+            (new Date().getTime() - new Date(2021, 9, 210).getTime())
       )
     );
     const date = randomDate.format("YYYY-MM-DD HH:mm");
