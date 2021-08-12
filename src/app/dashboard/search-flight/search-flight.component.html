@@ -1,4 +1,4 @@
-<form class="search-form" [formGroup]="form" (ngSubmit)="submit()">
+<form class="search-form" [formGroup]="form" (ngSubmit)="searchFlight()">
   <mat-card class="form-card" *ngIf="flightCity.length">
     <div class="card-header">Wyszukaj loty</div>
     <mat-card-content class="content">
@@ -25,7 +25,7 @@
             [minDate]="minDate"
             [error]="errorarrivalDate"
             [disabled]="!form.get('departureDate')?.value.length"
-            (selectDate)="setarrivalDate($event)"
+            (selectDate)="setArrivalDate($event)"
           ></app-datepicker>
         </div>
       </div>

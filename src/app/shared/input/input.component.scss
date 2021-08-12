@@ -43,6 +43,14 @@
       opacity: 0.5;
     }
 
+    .mat-form-field-underline {
+      display: none;
+    }
+
+    .mat-select-panel ng-animating {
+      visibility: hidden;
+    }
+
     .mat-form-field-infix {
       padding: 0 !important;
       border: none;
@@ -78,18 +86,19 @@
         }
       }
     }
-  }
 
-  input.mat-input-element {
-    padding-left: 8px;
-    color: $color-input-value;
-    margin: 0;
-    line-height: 36px;
+    input.mat-input-element {
+      padding-left: 8px;
+      color: $color-input-value;
+      margin: 0;
+      line-height: 36px;
 
-    &::placeholder {
-      color: $color-placeholder-value;
-      font-size: 12px;
-      line-height: 14px;
+      &::placeholder {
+        color: $color-placeholder-value;
+        font-size: 12px;
+        line-height: 14px;
+      }
     }
   }
+
 }

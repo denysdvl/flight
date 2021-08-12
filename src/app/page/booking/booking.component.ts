@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Flight } from '../../../model/flight';
+import { Flight } from '../../../interface/flight';
+import { FlightApi } from '../../../services/flight.service';
 
 @Component({
   selector: 'app-booking',
@@ -16,20 +17,26 @@ export class BookingComponent implements OnInit, OnDestroy {
   departureKey = '';
   arrivalDate: Date;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router, private flightApi: FlightApi) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.queryParams
       .pipe(takeUntil(this.destroy$))
       .subscribe((bookingItem: Params) => {
         this.arrivalKey = bookingItem.arrivalKey;
         this.departureKey = bookingItem.departureKey;
-        this.departureDate = new Date(bookingItem.departureDate);
-        this.arrivalDate = new Date(bookingItem.arrivalDate);
+        this.departureDate = new Date(`${bookingItem.departureDate} ${bookingItem.departureTime}`);
+        this.arrivalDate = new Date(`${bookingItem.arrivalDate} ${bookingItem.arrivalTime}`);
+        this.flightApi.searchFlight(
+          bookingItem.arrival,
+          bookingItem.departure,
+          bookingItem.departureDate,
+          bookingItem.arrivalDate
+        );
       });
   }
 
-  bookingItem(item: Flight) {
+  bookingItem(item: Flight): void {
     this.router.navigate(['booking'], { queryParams: { ...item } });
   }
 

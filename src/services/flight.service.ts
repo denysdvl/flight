@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/services/api.service';
-import * as _moment from 'moment';
-import { City } from '../model/city';
+import * as moment from 'moment';
+import { City } from '../interface/city';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { HttpParams, HttpParamsOptions } from '@angular/common/http';
-import { Flight } from '../model/flight';
-const moment = _moment;
+import { map } from 'rxjs/operators';
+import { HttpParams } from '@angular/common/http';
+import { Flight } from '../interface/flight';
 
 @Injectable({
   providedIn: 'root',
@@ -17,26 +16,10 @@ export class FlightApi {
   private departureDate$ = new BehaviorSubject<string>(
     moment(new Date()).format('YYYY-MM-DD HH:mm')
   );
-  private bookingFlight$ = new BehaviorSubject<number>(2);
   private pageList = 1;
   constructor(private apiService: ApiService) {}
 
-  getCity(): Observable<City[]> {
-    return this.apiService.get<City[]>('city').pipe(
-      map((city) =>
-        city.map((item) => {
-          return { ...item, disabled: false };
-        })
-      )
-    );
-  }
-
-  sendBookingFlight() {
-    const newCounter = this.bookingFlight$.getValue() + 1;
-    this.bookingFlight$.next(newCounter);
-  }
-
-  filterFlight(
+  searchFlight(
     arrival: string,
     departure: string,
     departureDate: string,
@@ -47,7 +30,8 @@ export class FlightApi {
       .set('_sort', 'departureDate')
       .set('_page', this.pageList.toString())
       .set('departure', departure)
-      .set('arrival', arrival);
+      .set('arrival', arrival)
+      .set('departureDate', departureDate);
     this.departureDate$.next(departureDate);
     this.flightParam$.next(params);
     this.setFlight(params);
@@ -70,33 +54,19 @@ export class FlightApi {
     this.setFlight(params);
   }
 
-  setFlight(params: HttpParams): void {
+  private setFlight(params: HttpParams): void {
     this.apiService
       .get<Flight[]>('flight', { params: params })
       .subscribe(this.updateList.bind(this));
   }
 
-  updateList(flightList: Flight[]) {
-    const departureDate = this.departureDate$.getValue();
-    const filterList = flightList.filter(
-      (item) =>
-        new Date(item.departureDate) > new Date(departureDate) ||
-        new Date(item.departureDate) === new Date(departureDate)
-    );
+  private updateList(flightList: Flight[]): void {
     const oldList = this.flightList$.getValue();
-    if (this.pageList === 1) {
-      this.flightList$.next(filterList);
-      return;
-    }
-    const newList = [...oldList, ...filterList];
-    this.flightList$.next(newList);
+    const list = this.pageList === 1 ? flightList : [...oldList, ...flightList];
+    this.flightList$.next(list);
   }
 
   getFlightList(): Observable<Flight[]> {
     return this.flightList$.asObservable();
-  }
-
-  getBookingFlight(): Observable<number> {
-    return this.bookingFlight$.asObservable();
   }
 }

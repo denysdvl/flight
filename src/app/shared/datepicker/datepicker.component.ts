@@ -1,15 +1,12 @@
 import { EventEmitter, Output } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
-import * as _moment from 'moment';
-
-const moment = _moment;
 
 @Component({
   selector: 'app-datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
 })
-export class DatepickerComponent implements OnInit {
+export class DatepickerComponent {
   @Input() placeholder = '';
   @Input() disabled = false;
   @Input() labelName = '';
@@ -17,11 +14,9 @@ export class DatepickerComponent implements OnInit {
   @Input() date: Date;
   @Output() selectDate: EventEmitter<Date> = new EventEmitter();
   @Input() minDate: Date = new Date();
-  constructor() {}
+  @Input() maxDate: Date = new Date(2021, 8, 20);
 
-  ngOnInit() {}
-
-  dateChange(date: Date) {
+  dateChange(date: Date): void {
     this.selectDate.emit(date);
   }
 }

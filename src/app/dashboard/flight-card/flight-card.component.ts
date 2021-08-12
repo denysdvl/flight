@@ -3,7 +3,7 @@ import { ElementRef } from '@angular/core';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatList } from '@angular/material/list';
 import { Observable } from 'rxjs';
-import { Flight } from '../../../model/flight';
+import { Flight } from '../../../interface/flight';
 import { FlightApi } from '../../../services/flight.service';
 
 @Component({
@@ -18,16 +18,16 @@ export class FlightCardComponent implements AfterViewInit {
   isMinSize = false;
   constructor(private flightApi: FlightApi, private cdRef: ChangeDetectorRef) {}
 
-  nextPage() {
+  nextPage(): void {
     this.flightApi.nextPage();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.isMinSize = this.contentList.nativeElement.clientWidth < 500;
     this.cdRef.detectChanges();
   }
 
-  selectItem(item: Flight) {
+  selectItem(item: Flight): void {
     this.clickItem.emit(item);
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,21 +8,17 @@ import { environment } from '../environments/environment';
   providedIn: 'root',
 })
 export class ApiService {
-  baseUrl = 'http://localhost:3000/';
-
-  httpOptions = {
+  private baseUrl = environment.apiUrl;
+  private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
   };
-  constructor(private http: HttpClient) {}
-  get<T>(url: string, params = {}, opt = {}): Observable<T> {
-    const options = Object.assign(params, opt, this.httpOptions);
-    return this.http.get<T>(this.baseUrl + url, options);
-  }
 
-  post<Req, Res>(url: string, req: Req, opt = {}): Observable<Res> {
-    const options = Object.assign(opt, this.httpOptions);
-    return this.http.post<Res>(this.baseUrl + url, req, options);
+  constructor(private http: HttpClient) {}
+
+  get<T>(url: string, params = {}): Observable<T> {
+    const options = { ...params, ...this.httpOptions };
+    return this.http.get<T>(this.baseUrl + url, options);
   }
 }

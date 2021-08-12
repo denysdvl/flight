@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FlightApi } from '../../../services/flight.service';
+import { BookingApi } from '../../../services/booking.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit {
-  bookingFlight$: Observable<number> = this.flightApi.getBookingFlight();
+export class NavbarComponent {
+  bookingFlight$: Observable<number> = this.bookingApi.getBookingFlight();
 
-  constructor(private flightApi: FlightApi) {}
-
-  ngOnInit() {}
+  constructor(private bookingApi: BookingApi) {}
 }

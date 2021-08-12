@@ -4,5 +4,7 @@ export interface Flight {
   departureKey: string;
   arrivalKey: string;
   departureDate: string;
+  departureTime: string;
   arrivalDate: string;
+  arrivalTime: string;
 }

@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as _moment from 'moment';
+import * as moment from 'moment';
 import { FlightApi } from '../../../services/flight.service';
-import { City } from '../../../model/city';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SelectList } from '../../shared/select/select.component';
-const moment = _moment;
+import { City } from '../../../interface/city';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { CityApi } from '../../../services/city.service';
+import { SelectList } from '../../../interface/selectList';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-flight',
@@ -15,20 +21,25 @@ const moment = _moment;
 })
 export class SearchFlightComponent implements OnInit {
   flightCity: City[] = [];
-  moment = _moment;
+  moment = moment;
   minDate: Date = new Date();
-  destroy$ = new Subject();
   errorarrivalDate = '';
-  form: FormGroup = new FormGroup({
-    departure: new FormControl('', Validators.required),
-    arrival: new FormControl('', Validators.required),
-    departureDate: new FormControl('', Validators.required),
-    arrivalDate: new FormControl(''),
-  });
-  constructor(private flightApi: FlightApi) {}
+  form: FormGroup;
+  private destroy$ = new Subject();
+  constructor(
+    private router: Router,
+    private flightApi: FlightApi,
+    private cityApi: CityApi,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.flightApi
+    this.creatForm();
+    this.setFlightCity();
+  }
+
+  private setFlightCity(): void {
+    this.cityApi
       .getCity()
       .pipe(takeUntil(this.destroy$))
       .subscribe((city) => {
@@ -36,42 +47,22 @@ export class SearchFlightComponent implements OnInit {
       });
   }
 
-  randomDate(start: Date, end: Date) {
-    return new Date(
-      start.getTime() + Math.random() * (end.getTime() - start.getTime())
-    );
-  }
-
-  setCity(city: SelectList, formControl: string) {
-    this.form.patchValue({
-      [formControl]: `${city.name} (${city.key})`,
+  private creatForm(): void {
+    this.form = this.fb.group({
+      departure: new FormControl('', Validators.required),
+      arrival: new FormControl('', Validators.required),
+      departureDate: new FormControl('', Validators.required),
+      arrivalDate: new FormControl(''),
     });
-    this.disabledCity(city.key);
   }
 
-  disabledCity(cityKey: string) {
+  private disabledCity(cityKey: string): void {
     this.flightCity = this.flightCity.map((item) => {
       return { ...item, disabled: item.key === cityKey };
     });
   }
 
-  setDepartureDate(date: Date) {
-    if (!date) {
-      this.form.patchValue({
-        departureDate: '',
-        arrivalDate: '',
-      });
-      this.minDate = new Date();
-      return;
-    }
-    this.form.patchValue({
-      departureDate: moment(date).format('YYYY-MM-DD HH:mm'),
-    });
-    this.minDate = date;
-    this.setErrorForDate();
-  }
-
-  setErrorForDate() {
+  private setErrorForDate(): void {
     this.errorarrivalDate = '';
     const arrivalDate = this.form.get('arrivalDate');
     const departureDate = this.form.get('departureDate');
@@ -86,27 +77,43 @@ export class SearchFlightComponent implements OnInit {
     }
   }
 
-  setarrivalDate(date: Date) {
+  setCity(city: SelectList, formControl: string): void {
+    this.form.get(formControl)?.setValue(`${city.name} (${city.key})`);
+    this.disabledCity(city.key);
+  }
+
+  setDepartureDate(date: Date): void {
+    if (!date) {
+      this.form.patchValue({
+        departureDate: '',
+        arrivalDate: '',
+      });
+      this.minDate = new Date();
+      return;
+    }
     this.form.patchValue({
-      arrivalDate: moment(date).format('YYYY-MM-DD HH:mm'),
+      departureDate: moment(date).format('YYYY-MM-DD'),
     });
+    this.minDate = date;
     this.setErrorForDate();
   }
 
-  searchFlight() {
+  setArrivalDate(date: Date): void {
+    this.form.get('arrivalDate')?.setValue(moment(date).format('YYYY-MM-DD'));
+    this.setErrorForDate();
+  }
+
+  searchFlight(): void {
     const formData = {
       ...this.form.value,
     };
-    this.flightApi.filterFlight(
+    this.flightApi.searchFlight(
       formData.arrival,
       formData.departure,
       formData.departureDate,
       formData.arrivalDate
     );
-  }
-
-  submit() {
-    this.searchFlight();
+    this.router.navigate(['home'], { queryParams: { ...formData } });
   }
 
   ngOnDestroy(): void {

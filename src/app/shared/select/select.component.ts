@@ -1,19 +1,12 @@
-import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
-import { City } from '../../../model/city';
-
-export interface SelectList {
-  id: number;
-  name: string;
-  key: string;
-  disabled: boolean;
-}
+import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { SelectList } from '../../../interface/selectList';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
 })
-export class SelectComponent implements OnInit {
+export class SelectComponent {
   @Input() placeholder = '';
   @Input() labelName = '';
   @Input() disabled = false;
@@ -22,11 +15,8 @@ export class SelectComponent implements OnInit {
   @Input() list: SelectList[] = [];
   @Output() onFocus: EventEmitter<boolean> = new EventEmitter();
   @Output() selectionChange: EventEmitter<SelectList> = new EventEmitter();
-  constructor() {}
 
-  ngOnInit() {}
-
-  selecting(selectedKey: string) {
+  selecting(selectedKey: string): void {
     const item = this.list.find(({ key }) => key === selectedKey);
     this.selectionChange.emit(item);
   }
