@@ -10,13 +10,14 @@ import { Flight } from '../interface/flight';
 @Injectable({
   providedIn: 'root',
 })
-export class FlightApi {
+export class FlightService {
   private flightList$ = new BehaviorSubject<Flight[]>([]);
   private flightParam$ = new BehaviorSubject<HttpParams>(new HttpParams());
   private departureDate$ = new BehaviorSubject<string>(
     moment(new Date()).format('YYYY-MM-DD HH:mm')
   );
   private pageList = 1;
+
   constructor(private apiService: ApiService) {}
 
   searchFlight(
@@ -54,6 +55,10 @@ export class FlightApi {
     this.setFlight(params);
   }
 
+  getFlightList(): Observable<Flight[]> {
+    return this.flightList$.asObservable();
+  }
+
   private setFlight(params: HttpParams): void {
     this.apiService
       .get<Flight[]>('flight', { params: params })
@@ -64,9 +69,5 @@ export class FlightApi {
     const oldList = this.flightList$.getValue();
     const list = this.pageList === 1 ? flightList : [...oldList, ...flightList];
     this.flightList$.next(list);
-  }
-
-  getFlightList(): Observable<Flight[]> {
-    return this.flightList$.asObservable();
   }
 }

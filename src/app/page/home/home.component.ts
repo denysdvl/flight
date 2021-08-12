@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Flight } from '../../../interface/flight';
-import { FlightApi } from '../../../services/flight.service';
+import { FlightService } from '../../../services/flight.service';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +12,11 @@ import { FlightApi } from '../../../services/flight.service';
 })
 export class HomeComponent implements OnInit {
   destroy$ = new Subject();
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private flightApi: FlightApi
+    private flightService: FlightService
   ) {}
 
   ngOnInit(): void {
@@ -23,10 +24,10 @@ export class HomeComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((bookingItem: Params) => {
         if (!Object.keys(bookingItem).length) {
-          this.flightApi.randomFlight();
+          this.flightService.randomFlight();
           return;
         }
-        this.flightApi.searchFlight(
+        this.flightService.searchFlight(
           bookingItem.arrival,
           bookingItem.departure,
           bookingItem.departureDate,

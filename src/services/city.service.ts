@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class CityApi {
+export class CityService {
   constructor(private apiService: ApiService) {}
 
   getCity(): Observable<City[]> {

@@ -4,7 +4,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatList } from '@angular/material/list';
 import { Observable } from 'rxjs';
 import { Flight } from '../../../interface/flight';
-import { FlightApi } from '../../../services/flight.service';
+import { FlightService } from '../../../services/flight.service';
 
 @Component({
   selector: 'app-flight-card',
@@ -12,14 +12,15 @@ import { FlightApi } from '../../../services/flight.service';
   styleUrls: ['./flight-card.component.scss'],
 })
 export class FlightCardComponent implements AfterViewInit {
-  flightList$: Observable<Flight[]> = this.flightApi.getFlightList();
+  flightList$: Observable<Flight[]> = this.flightService.getFlightList();
+  isMinSize = false;
   @Output() clickItem: EventEmitter<Flight> = new EventEmitter();
   @ViewChild('contentList') contentList: ElementRef;
-  isMinSize = false;
-  constructor(private flightApi: FlightApi, private cdRef: ChangeDetectorRef) {}
+
+  constructor(private flightService: FlightService, private cdRef: ChangeDetectorRef) {}
 
   nextPage(): void {
-    this.flightApi.nextPage();
+    this.flightService.nextPage();
   }
 
   ngAfterViewInit(): void {

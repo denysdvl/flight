@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BookingApi } from '../../../services/booking.service';
+import { BookingService } from '../../../services/booking.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +8,7 @@ import { BookingApi } from '../../../services/booking.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  bookingFlight$: Observable<number> = this.bookingApi.getBookingFlight();
+  bookingFlight$: Observable<number> = this.bookingService.getBookingFlight();
 
-  constructor(private bookingApi: BookingApi) {}
+  constructor(private bookingService: BookingService) {}
 }

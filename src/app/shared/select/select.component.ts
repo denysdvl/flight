@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { SelectList } from '../../../interface/selectList';
+import { SelectList } from '../../../interface/select-list';
 
 @Component({
   selector: 'app-select',

@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class BookingApi {
+export class BookingService {
   private bookingFlight$ = new BehaviorSubject<number>(2);
 
   sendBookingFlight(): void {

@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Flight } from '../../../interface/flight';
-import { FlightApi } from '../../../services/flight.service';
+import { FlightService } from '../../../services/flight.service';
 
 @Component({
   selector: 'app-booking',
@@ -17,7 +17,11 @@ export class BookingComponent implements OnInit, OnDestroy {
   departureKey = '';
   arrivalDate: Date;
 
-  constructor(private route: ActivatedRoute, private router: Router, private flightApi: FlightApi) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private flightService: FlightService
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams
@@ -25,9 +29,13 @@ export class BookingComponent implements OnInit, OnDestroy {
       .subscribe((bookingItem: Params) => {
         this.arrivalKey = bookingItem.arrivalKey;
         this.departureKey = bookingItem.departureKey;
-        this.departureDate = new Date(`${bookingItem.departureDate} ${bookingItem.departureTime}`);
-        this.arrivalDate = new Date(`${bookingItem.arrivalDate} ${bookingItem.arrivalTime}`);
-        this.flightApi.searchFlight(
+        this.departureDate = new Date(
+          `${bookingItem.departureDate} ${bookingItem.departureTime}`
+        );
+        this.arrivalDate = new Date(
+          `${bookingItem.arrivalDate} ${bookingItem.arrivalTime}`
+        );
+        this.flightService.searchFlight(
           bookingItem.arrival,
           bookingItem.departure,
           bookingItem.departureDate,

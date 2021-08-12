@@ -8,9 +8,9 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { City } from '../../../interface/city';
-import { SelectList } from '../../../interface/selectList';
-import { BookingApi } from '../../../services/booking.service';
-import { CityApi } from '../../../services/city.service';
+import { SelectList } from '../../../interface/select-list';
+import { BookingService } from '../../../services/booking.service';
+import { CityService } from '../../../services/city.service';
 
 @Component({
   selector: 'app-booking-card',
@@ -22,13 +22,14 @@ export class BookingCardComponent implements OnInit {
   @Input() departureDate: Date;
   @Input() departureKey = '';
   @Input() arrivalDate: Date;
-  private destroy$ = new Subject();
   flightCity: City[] = [];
   classList = [{ id: 1, key: 'Biznesowa', name: 'Biznesowa', disabled: false }];
   form: FormGroup;
+  private destroy$ = new Subject();
+  
   constructor(
-    private bookingApi: BookingApi,
-    private cityApi: CityApi,
+    private bookingService: BookingService,
+    private cityService: CityService,
     private fb: FormBuilder
   ) {}
 
@@ -37,8 +38,33 @@ export class BookingCardComponent implements OnInit {
     this.setFlightCity();
   }
 
+  setValue(value: string, formControl: string): void {
+    this.form.get(formControl)?.setValue(value.trim());
+  }
+
+  controlsTouched(formControl: string): void {
+    this.form.get(formControl)?.markAsTouched();
+  }
+
+  submit(): void {
+    this.bookingService.sendBookingFlight();
+  }
+
+  getError(formControl: string): string {
+    const control = this.form.get(formControl);
+    if (!control) {
+      return '';
+    }
+    const isNotValid = control.touched && control.status === 'INVALID';
+    return isNotValid ? 'To pole jest wymagane.' : '';
+  }
+
+  selectClass(selectClass: SelectList): void {
+    this.form.get('typeClass')?.setValue(selectClass.key);
+  }
+
   private setFlightCity(): void {
-    this.cityApi
+    this.cityService
       .getCity()
       .pipe(takeUntil(this.destroy$))
       .subscribe((city) => {
@@ -53,30 +79,6 @@ export class BookingCardComponent implements OnInit {
       numberOfPeople: new FormControl('', Validators.required),
       typeClass: new FormControl('', Validators.required),
     });
-  }
-  setValue(value: string, formControl: string): void {
-    this.form.get(formControl)?.setValue(value.trim());
-  }
-
-  controlsTouched(formControl: string): void {
-    this.form.get(formControl)?.markAsTouched();
-  }
-
-  submit(): void {
-    this.bookingApi.sendBookingFlight();
-  }
-
-  getError(formControl: string): string {
-    const control = this.form.get(formControl);
-    if (!control) {
-      return '';
-    }
-    const isNotValid = control.touched && control.status === 'INVALID';
-    return isNotValid ? 'To pole jest wymagane.' : '';
-  }
-
-  selectClass(selectClass: SelectList): void {
-    this.form.get('typeClass')?.setValue(selectClass.key);
   }
 
   ngOnDestroy(): void {
